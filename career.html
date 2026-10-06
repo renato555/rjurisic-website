@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Career · Renato Jurišić</title>
+<meta name="description" content="Renato Jurišić's education and work, from high school in Zagreb to senior software engineer at Infobip.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="site.js"></script>
+<style>
+  /* Legend: the marker shapes used on the timeline */
+  .legend {
+    display: flex;
+    gap: 0.5rem 1.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+    font-family: var(--sans);
+    color: var(--ink-soft);
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 0.55rem; }
+
+  .dot {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot.edu { background: var(--paper); border: 3px solid var(--bloom); }
+  .dot.work { background: var(--leaf); border: 3px solid var(--leaf); }
+
+  /* ── Timeline ── */
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: clamp(2rem, 5vw, 3.5rem) 0 1rem;
+    margin-bottom: clamp(1.5rem, 4vw, 3rem);
+    position: relative;
+    --when: 10rem;
+    --gap: 1.5rem;
+  }
+  /* The rail */
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--when) + var(--gap) + 6px);
+    width: 2px;
+    background: var(--rule);
+  }
+  .entry {
+    display: grid;
+    grid-template-columns: var(--when) 14px minmax(0, 1fr);
+    gap: 0 var(--gap);
+    padding-bottom: clamp(2.5rem, 6vw, 4rem);
+    position: relative;
+  }
+  .entry:last-child { padding-bottom: 0; }
+
+  .when {
+    text-align: right;
+    font-family: var(--sans);
+    color: var(--ink-faint);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  .when .year {
+    display: block;
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    font-variant-numeric: lining-nums;
+  }
+
+  .entry .dot {
+    margin-top: 0.6rem;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 0 5px var(--paper);
+  }
+
+  .body { max-width: 44rem; }
+  .body h2 {
+    font-size: clamp(1.4rem, 2.6vw, 1.75rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    margin: 0 0 0.3rem;
+  }
+  .body .role {
+    font-family: var(--sans);
+    color: var(--ink-soft);
+    margin: 0 0 1rem;
+  }
+  .body > p { max-width: var(--measure); color: var(--ink-soft); }
+  .body .sub {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 1.75rem 0 0.35rem;
+  }
+  .body > p:last-child { margin-bottom: 0; }
+
+  .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 0 0 1rem; padding: 0; list-style: none; }
+  .tags li {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    background: var(--leaf-soft);
+    color: var(--leaf);
+    border-radius: 999px;
+    padding: 0.15rem 0.75rem;
+  }
+
+  /* Plain highlights */
+  .points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: var(--measure);
+  }
+  .points li {
+    position: relative;
+    padding-left: 1.4rem;
+    margin-bottom: 0.7rem;
+    color: var(--ink-soft);
+  }
+  .points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.7rem;
+    height: 2px;
+    background: var(--leaf);
+  }
+  .points li:last-child { margin-bottom: 0; }
+  .points strong { color: var(--ink); font-weight: 600; }
+
+  /* Highlights with a headline number */
+  .wins {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+  }
+  .wins li {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    gap: 0 1.5rem;
+    padding: 1.1rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .wins .num {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-weight: 500;
+    color: var(--leaf);
+    font-variant-numeric: lining-nums tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .wins .num small {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    letter-spacing: 0;
+    color: var(--ink-faint);
+    font-weight: 400;
+    margin-top: 0.15rem;
+  }
+  .wins h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 0.2rem; }
+  .wins p { margin: 0; color: var(--ink-soft); }
+
+
+  /* Course rankings, collapsed by default */
+  .courses { margin-top: 1.25rem; max-width: 40rem; }
+  .courses summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-weight: 600;
+    color: var(--leaf);
+    list-style: none;
+  }
+  .courses summary::-webkit-details-marker { display: none; }
+  .courses summary::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 6px solid currentColor;
+    border-top: 4.5px solid transparent;
+    border-bottom: 4.5px solid transparent;
+    transition: transform 0.15s ease;
+  }
+  .courses[open] summary::before { transform: rotate(90deg); }
+  .courses summary:hover { color: var(--ink); }
+  .courses table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.98rem;
+  }
+  .courses caption {
+    caption-side: bottom;
+    text-align: left;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    padding-top: 0.75rem;
+  }
+  .courses thead th {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    text-align: left;
+    padding: 0 0 0.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .courses .sem th {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--ink);
+    text-align: left;
+    padding: 1rem 0 0.3rem;
+  }
+  .courses td {
+    padding: 0.3rem 0;
+    color: var(--ink-soft);
+    vertical-align: top;
+    border-bottom: 1px solid var(--rule);
+  }
+  .courses .n {
+    text-align: right;
+    white-space: nowrap;
+    padding-left: 1rem;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+  .courses .first td { color: var(--ink); }
+  .courses .first td:last-child { color: var(--leaf); font-weight: 600; }
+
+  @media (max-width: 680px) {
+    .timeline { --when: 0rem; --gap: 1.1rem; }
+    .timeline::before { left: 6px; }
+    .entry { grid-template-columns: 14px minmax(0, 1fr); }
+    .entry .dot { grid-column: 1; grid-row: 1; }
+    .when { grid-column: 2; grid-row: 1; text-align: left; margin-bottom: 0.5rem; }
+    .body { grid-column: 2; }
+  }
+  @media (max-width: 480px) {
+    .wins li { grid-template-columns: 1fr; gap: 0.35rem; }
+  }
+
+</style>
+</head>
+<body>
+
+<header class="site-header wrap">
+  <a class="site-name" href="index.html">Renato Jurišić</a>
+  <nav class="site-nav" aria-label="Main">
+    <a href="index.html">Home</a>
+    <a href="career.html" aria-current="page">Career</a>
+    <a href="blog.html">Blog</a>
+    <a href="books.html">Books</a>
+  </nav>
+</header>
+
+<main>
+  <div class="page-intro wrap">
+    <h1>Career</h1>
+    <p>Newest first, from building LLM systems at Infobip back to high school in Zagreb. School and work overlapped for a few years, so some entries run side by side.</p>
+    <div class="legend" aria-hidden="true">
+      <span><i class="dot edu"></i>Education</span>
+      <span><i class="dot work"></i>Work</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <ol class="timeline">
+
+      <!-- Infobip senior -->
+      <li class="entry">
+        <div class="when"><span class="year">2024</span>Jun 2024 to now</div>
+        <i class="dot work" role="img" aria-label="Work"></i>
+        <div class="body">
+          <h2>Infobip</h2>
+          <p class="role">Senior software engineer</p>
+          <p>After my master's, I returned to Anam Protect full-time, splitting my time between the core message-inspection service, bringing LLMs into production, and helping people around the department do the same. I'm the department's go-to engineer for text similarity and SMS fraud prevention, I help run large Anam Protect deployments around the world, and I mentor new team members.</p>
+          <p>These days I spend most of my time on a new internal application, an AI-assisted workspace for Infobip's partnerships with mobile network operators. More on that once it ships.</p>
+          <ul class="wins">
+            <li>
+              <div class="num">1000s<small>developer hours saved</small></div>
+              <div>
+                <h3>AI Knowledge Hub</h3>
+                <p>An AI assistant I built that answers questions about how our applications work, straight from their source code. Everyone from other engineers and product managers to solution and network engineers asks it instead of the developers, which has saved thousands of developer hours.</p>
+              </div>
+            </li>
+            <li>
+              <div class="num">42k→800<small>CPU cores</small></div>
+              <div>
+                <h3>Fuzzy LLM cache</h3>
+                <p>A text-similarity cache in front of our LLM classifier that handles 700 million requests a day. Near-identical messages reuse an earlier answer, so classification runs at sub-millisecond latency. Together with the text-similarity work I started in 2022, the improvements cut the compute needed from about 42,000 CPU cores to 800.</p>
+              </div>
+            </li>
+            <li>
+              <div class="num">45→90%<small>traffic classified</small></div>
+              <div>
+                <h3>GenAI classifier for A2P traffic</h3>
+                <p>I championed a generative AI classifier for application-to-person messages. Doubling the share of traffic we can label made routing cheaper.</p>
+              </div>
+            </li>
+            <li>
+              <div class="num">&lt;10 ms<small>at the 99.9th percentile</small></div>
+              <div>
+                <h3>New regex engine for packet inspection</h3>
+                <p>I led the migration of the service that applies rules to every network packet. Latency improved tenfold and CPU use dropped to a third.</p>
+              </div>
+            </li>
+            <li>
+              <div class="num">100M+<small>messages labelled</small></div>
+              <div>
+                <h3>LLM-powered sender branding</h3>
+                <p>This started as a hackathon prototype. It is now a distributed production system that labels hundreds of millions of messages at single-digit millisecond latency.</p>
+              </div>
+            </li>
+            <li>
+              <div class="num">10<small>improvements proposed</small></div>
+              <div>
+                <h3>Fraud leakage review for a major operator</h3>
+                <p>I defined a taxonomy for the fraud that gets through, analyzed the traffic with our data science team, and proposed ten product changes.</p>
+              </div>
+            </li>
+            <li>
+              <div class="num">180<small>people in the department</small></div>
+              <div>
+                <h3>The go-to person for AI</h3>
+                <p>Engineers and non-engineers come to me about AI tooling and product integration. I brought data science onto the firewall products and taught a 35-person non-engineering team to use Claude Code.</p>
+              </div>
+            </li>
+          </ul>
+          <h3 class="sub">Talks</h3>
+          <ul class="points">
+            <li><strong>Classifying 700 million messages a day</strong> with quality comparable to LLMs, but without the LLM cost. A public talk at an Infobip meetup in Zagreb, September 2026. <a href="https://www.linkedin.com/feed/update/urn:li:activity:7505618123325235200/">Event announcement</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- Teaching -->
+      <li class="entry">
+        <div class="when"><span class="year">2023</span>Oct 2023 to Jun 2024</div>
+        <i class="dot work" role="img" aria-label="Work"></i>
+        <div class="body">
+          <h2>Teaching assistant at FER</h2>
+          <p class="role">Student teaching assistant, alongside my master's</p>
+          <p>I helped students who got stuck on the coursework, showed them ways to solve the assigned tasks, and quizzed them on and graded their lab assignments.</p>
+          <h3 class="sub">Courses</h3>
+          <ul class="points">
+            <li>Machine Learning 1</li>
+            <li>Advanced Algorithms and Data Structures</li>
+            <li>Introduction to Artificial Intelligence</li>
+            <li>Deep Learning 1</li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- MSc -->
+      <li class="entry">
+        <div class="when"><span class="year">2022</span>Sep 2022 to Jul 2024</div>
+        <i class="dot edu" role="img" aria-label="Education"></i>
+        <div class="body">
+          <h2>MSc in Computer Science</h2>
+          <p class="role">University of Zagreb, FER</p>
+          <p>Focused on deep learning, computer vision and generative AI. Graduated summa cum laude with a 5.0 GPA out of 5.0.</p>
+          <ul class="tags" aria-label="Dean's Award years">
+            <li>Dean's Award 2022/23</li>
+            <li>Dean's Award 2023/24</li>
+          </ul>
+          <ul class="points">
+            <li><strong>Master's thesis</strong>, "Image Generation and Inpainting Using Diffusion Models". I trained a diffusion model that learns from images as the condition but takes text at inference time, then built a web app that edits photos of faces from written instructions, like an AI-powered Photoshop. <a href="https://zir.nsk.hr/object/fer:12390">Read the thesis</a> (in Croatian)</li>
+            <li><strong>Won 1st place at the Algotrade hackathon</strong> in April 2024, out of 25 teams and 100 competitors. In under 24 hours, our team of four built a bot that trades resources and energy with other players' bots, tuned for maximum profit.</li>
+            <li><strong>Co-authored a paper</strong>, "Beyond Duplicates: Unleashing Transitivity in Quora Data Augmentation". If question A duplicates B and B duplicates C, then A duplicates C; we tested whether adding pairs like that helps classifiers. <a href="https://www.fer.unizg.hr/_download/repository/TAR-2023-ProjectReports.pdf#page=35">Read the paper</a></li>
+            <li>Ranked 1st in 6 of 19 courses and in the top 3 in 11. My median rank was in the top 2.9% of each course.</li>
+          </ul>
+          <details class="courses">
+            <summary>Show all 19 courses with my rank</summary>
+            <table>
+              <caption>Score is my share of the course's points. Rank is my place among everyone who took the course that year.</caption>
+              <thead><tr><th scope="col">Course</th><th scope="col" class="n">Score</th><th scope="col" class="n">Rank</th></tr></thead>
+              <tbody>
+                <tr class="sem"><th scope="rowgroup" colspan="3">Semester 1</th></tr>
+                <tr class="first"><td>Distributed Ledgers and Cryptocurrencies</td><td class="n">90%</td><td class="n">1st of 110</td></tr>
+                <tr class="first"><td>Web Architecture, Protocols, and Services</td><td class="n">95%</td><td class="n">1st of 64</td></tr>
+                <tr><td>Evolutionary Computing Optimization</td><td class="n">95.5%</td><td class="n">5th of 86</td></tr>
+                <tr><td>Machine Learning 1</td><td class="n">93.7%</td><td class="n">7th of 347</td></tr>
+                <tr><td>Advanced Algorithms and Data Structures</td><td class="n">94.7%</td><td class="n">9th of 376</td></tr>
+                <tr><td>Knowledge Management</td><td class="n">90%</td><td class="n">44th of 622</td></tr>
+              </tbody>
+              <tbody>
+                <tr class="sem"><th scope="rowgroup" colspan="3">Semester 2</th></tr>
+                <tr class="first"><td>Parallel Programming</td><td class="n">98.5%</td><td class="n">1st of 269</td></tr>
+                <tr class="first"><td>Analysis of Massive Datasets</td><td class="n">98.4%</td><td class="n">1st of 76</td></tr>
+                <tr class="first"><td>Computational Methods in Modern Physics</td><td class="n">100%</td><td class="n">1st of 8</td></tr>
+                <tr><td>Deep Learning 1</td><td class="n">98.5%</td><td class="n">2nd of 185</td></tr>
+                <tr><td>Text Analysis and Retrieval</td><td class="n">92%</td><td class="n">12th of 52</td></tr>
+                <tr><td>Research of Public Opinion in Acceptance of New Technologies</td><td class="n">89%</td><td class="n">24th of 441</td></tr>
+              </tbody>
+              <tbody>
+                <tr class="sem"><th scope="rowgroup" colspan="3">Semester 3</th></tr>
+                <tr class="first"><td>Competitive Programming</td><td class="n">92%</td><td class="n">1st of 39</td></tr>
+                <tr><td>Neural Networks</td><td class="n">99%</td><td class="n">2nd of 179</td></tr>
+                <tr><td>Computer Vision</td><td class="n">94.6%</td><td class="n">3rd of 80</td></tr>
+                <tr><td>Deep Learning 2</td><td class="n">98%</td><td class="n">3rd of 54</td></tr>
+                <tr><td>Distributed Big Data Processing</td><td class="n">95%</td><td class="n">3rd of 18</td></tr>
+                <tr><td>Data Visualization</td><td class="n">91.9%</td><td class="n">4th of 138</td></tr>
+                <tr><td>Intellectual Property in Industry</td><td class="n">88%</td><td class="n">151st of 466</td></tr>
+              </tbody>
+            </table>
+          </details>
+        </div>
+      </li>
+
+      <!-- Infobip part-time -->
+      <li class="entry">
+        <div class="when"><span class="year">2022</span>Jul 2022 to Oct 2023</div>
+        <i class="dot work" role="img" aria-label="Work"></i>
+        <div class="body">
+          <h2>Infobip</h2>
+          <p class="role">Student software engineer, part-time alongside my studies</p>
+          <p>My first job, split across two projects.</p>
+          <h3 class="sub">IoT: SIM card lifecycle</h3>
+          <p>I helped redesign and rewrite the service that manages the lifecycle of SIM cards, breaking a monolith into microservices. Built with Java, Spring Boot, Kafka and RabbitMQ.</p>
+          <h3 class="sub">Anam Protect: SMS fraud</h3>
+          <p>Anam Protect is Infobip's SMS firewall. It looks at every message crossing a mobile network and blocks the fraudulent ones in real time, for 1.2 billion subscribers worldwide. I worked on its production systems, which analyse millions of messages a day, building new features, fixing bugs, updating designs and writing tests.</p>
+          <ul class="wins">
+            <li>
+              <div class="num">4×<small>faster cluster search</small></div>
+              <div>
+                <h3>Bitwise text similarity</h3>
+                <p>A new text-similarity algorithm built on bitwise operations. It sped up the search for clusters of near-identical messages and saved about 1,000 CPU cores.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- BSc -->
+      <li class="entry">
+        <div class="when"><span class="year">2019</span>to 2022</div>
+        <i class="dot edu" role="img" aria-label="Education"></i>
+        <div class="body">
+          <h2>BSc in Computer Science</h2>
+          <p class="role">University of Zagreb, Faculty of Electrical Engineering and Computing (FER)</p>
+          <p>Focused on software engineering and mathematics. Graduated with a 4.94 GPA out of 5.0.</p>
+          <ul class="tags" aria-label="Dean's Award years">
+            <li>Dean's Award 2019/20</li>
+            <li>Dean's Award 2020/21</li>
+          </ul>
+          <ul class="points">
+            <li><strong>Bachelor's thesis</strong> on how to scale deep convolutional networks, comparing models on standard classification datasets for transfer learning.</li>
+            <li>Ranked 1st in 6 of 32 courses and in the top 5% in 25. My median rank was in the top 1.4% of each course.</li>
+          </ul>
+          <details class="courses">
+            <summary>Show all 32 courses with my rank</summary>
+            <table>
+              <caption>Score is my share of the course's points. Rank is my place among everyone who took the course that year.</caption>
+              <thead><tr><th scope="col">Course</th><th scope="col" class="n">Score</th><th scope="col" class="n">Rank</th></tr></thead>
+              <tbody>
+                <tr class="sem"><th scope="rowgroup" colspan="3">Semester 1</th></tr>
+                <tr class="first"><td>Mathematical Analysis 1</td><td class="n">98%</td><td class="n">1st of 733</td></tr>
+                <tr><td>Digital Logic</td><td class="n">97.3%</td><td class="n">4th of 742</td></tr>
+                <tr><td>Introduction to Programming</td><td class="n">94.5%</td><td class="n">7th of 721</td></tr>
+                <tr><td>Linear Algebra</td><td class="n">98%</td><td class="n">11th of 793</td></tr>
+                <tr><td>Communication Skills</td><td class="n">92.6%</td><td class="n">116th of 670</td></tr>
+              </tbody>
+              <tbody>
+                <tr class="sem"><th scope="rowgroup" colspan="3">Semester 2</th></tr>
+                <tr class="first"><td>Physics</td><td class="n">100%</td><td class="n">1st of 810</td></tr>
+                <tr><td>Fundamentals of Electrical Engineering</td><td class="n">95.8%</td><td class="n">5th of 721</td></tr>
+                <tr><td>Mathematical Analysis 2</td><td class="n">95%</td><td class="n">9th of 818</td></tr>
+                <tr><td>Object Oriented Programming</td><td class="n">88%</td><td class="n">32nd of 836</td></tr>
+                <tr><td>Management in Engineering</td><td class="n">86%</td><td class="n">43rd of 364</td></tr>
+              </tbody>
+              <tbody>
+                <tr class="sem"><th scope="rowgroup" colspan="3">Semester 3</th></tr>
+                <tr class="first"><td>Algorithms and Data Structures</td><td class="n">99%</td><td class="n">1st of 475</td></tr>
+                <tr class="first"><td>Probability and Statistics</td><td class="n">98%</td><td class="n">1st of 541</td></tr>
+                <tr><td>Computer Architecture 1</td><td class="n">93.5%</td><td class="n">5th of 484</td></tr>
+                <tr><td>Discrete Mathematics 1</td><td class="n">98%</td><td class="n">6th of 505</td></tr>
+                <tr><td>Information Theory</td><td class="n">86%</td><td class="n">16th of 705</td></tr>
+                <tr><td>Engineering Economics 1</td><td class="n">90%</td><td class="n">16th of 385</td></tr>
+              </tbody>
+              <tbody>
+                <tr class="sem"><th scope="rowgroup" colspan="3">Semester 4</th></tr>
+                <tr class="first"><td>Operating Systems</td><td class="n">98.5%</td><td class="n">1st of 489</td></tr>
+                <tr><td>Databases</td><td class="n">91.1%</td><td class="n">5th of 511</td></tr>
+                <tr><td>Introduction to Theoretical Computer Science</td><td class="n">93.2%</td><td class="n">5th of 473</td></tr>
+                <tr><td>Web Software Development</td><td class="n">93%</td><td class="n">7th of 512</td></tr>
+                <tr><td>Communication Networks</td><td class="n">94.5%</td><td class="n">12th of 559</td></tr>
+                <tr><td>Risk Management</td><td class="n">92%</td><td class="n">393rd of 700</td></tr>
+              </tbody>
+              <tbody>
+                <tr class="sem"><th scope="rowgroup" colspan="3">Semester 5</th></tr>
+                <tr><td>Statistical Data Analysis</td><td class="n">93.5%</td><td class="n">5th of 182</td></tr>
+                <tr><td>Selected Topics in Software Development 1</td><td class="n">95.4%</td><td class="n">6th of 101</td></tr>
+                <tr><td>Software Engineering</td><td class="n">92.2%</td><td class="n">9th of 446</td></tr>
+                <tr><td>Programming Language Translation</td><td class="n">76.1%</td><td class="n">22nd of 459</td></tr>
+                <tr><td>Environmental Sustainability and Climate Change Mitigation</td><td class="n">85%</td><td class="n">29th of 261</td></tr>
+              </tbody>
+              <tbody>
+                <tr class="sem"><th scope="rowgroup" colspan="3">Semester 6</th></tr>
+                <tr class="first"><td>Design Patterns</td><td class="n">93.7%</td><td class="n">1st of 114</td></tr>
+                <tr><td>Stochastic Processes</td><td class="n">96%</td><td class="n">3rd of 40</td></tr>
+                <tr><td>Computer Security</td><td class="n">96%</td><td class="n">4th of 446</td></tr>
+                <tr><td>Basic Design Principles</td><td class="n">95%</td><td class="n">20th of 70</td></tr>
+                <tr><td>Introduction to Artificial Intelligence</td><td class="n">89.9%</td><td class="n">21st of 504</td></tr>
+              </tbody>
+            </table>
+          </details>
+        </div>
+      </li>
+
+      <!-- High school -->
+      <li class="entry">
+        <div class="when"><span class="year">2015</span>to 2019</div>
+        <i class="dot edu" role="img" aria-label="Education"></i>
+        <div class="body">
+          <h2>X. gimnazija "Ivan Supek"</h2>
+          <p class="role">High school, science and mathematics programme. Zagreb</p>
+          <ul class="points">
+            <li><strong>Valedictorian</strong> of my generation.</li>
+            <li><strong>Physics competition</strong> in my final year, the first and only competition I entered in high school. I shared first place in Zagreb and finished 7th in Croatia at the national round. <a href="http://rezultati.natjecanja-iz-fizike.net/">Official results</a></li>
+          </ul>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+
+</main>
+
+<footer class="site-footer wrap">
+  <ul>
+    <li><a href="mailto:renato.jurisic6@gmail.com">renato.jurisic6@gmail.com</a></li>
+    <li><a href="https://linkedin.com/in/renato-jurisic5">LinkedIn</a></li>
+    <li><a href="https://github.com/renato555">GitHub</a></li>
+  </ul>
+  <button class="theme-toggle" type="button">Dark mode</button>
+</footer>
+
+</body>
+</html>

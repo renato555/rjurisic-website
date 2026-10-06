@@ -1,0 +1,249 @@
+/* Renato Jurišić — personal site
+   Palette: blueberry ink, leaf green, blueberry bloom on cool paper. */
+
+:root {
+  --paper: #F3F5F0;
+  --paper-deep: #E7EBE3;
+  --ink: #1C1F44;
+  --ink-soft: #4C5075;
+  --ink-faint: #7C809C;
+  --leaf: #2E7D4F;
+  --leaf-soft: #D6E8DB;
+  --bloom: #8D99CC;
+  --rule: #D3D8CE;
+
+  --serif: "Literata", Georgia, serif;
+  --sans: "Familjen Grotesk", system-ui, sans-serif;
+
+  --measure: 36rem;
+  --gutter: clamp(16px, 5vw, 56px);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14162E;
+    --paper-deep: #1C1F3D;
+    --ink: #E6E8F2;
+    --ink-soft: #AEB2CE;
+    --ink-faint: #7F84A6;
+    --leaf: #74D198;
+    --leaf-soft: #22412F;
+    --bloom: #7F8BC4;
+    --rule: #2C2F52;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14162E;
+  --paper-deep: #1C1F3D;
+  --ink: #E6E8F2;
+  --ink-soft: #AEB2CE;
+  --ink-faint: #7F84A6;
+  --leaf: #74D198;
+  --leaf-soft: #22412F;
+  --bloom: #7F8BC4;
+  --rule: #2C2F52;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--leaf);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em;
+}
+a:hover { color: var(--leaf); }
+
+:focus-visible {
+  outline: 2px solid var(--leaf);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+p { margin: 0 0 1em; }
+strong { font-weight: 600; }
+
+.wrap {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ── Site header ── */
+.site-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  font-family: var(--sans);
+}
+
+.site-name {
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.site-name:hover { color: var(--ink); }
+.site-name::before {
+  content: "";
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-right: 0.5em;
+  border-radius: 50%;
+  background: var(--leaf);
+  vertical-align: 0.05em;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.98rem;
+}
+.site-nav a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  padding-bottom: 2px;
+  border-bottom: 1.5px solid transparent;
+}
+.site-nav a:hover { color: var(--ink); }
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--leaf);
+}
+
+/* ── Page intro (inner pages) ── */
+.page-intro {
+  padding-top: clamp(2.5rem, 8vw, 5.5rem);
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--rule);
+}
+.page-intro h1 {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.25rem;
+}
+.page-intro p {
+  max-width: var(--measure);
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* ── Generic section ── */
+.section {
+  padding-top: clamp(2.5rem, 6vw, 4.5rem);
+  padding-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+.section + .section { border-top: 1px solid var(--rule); }
+
+.section-head {
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin: 0 0 1.75rem;
+}
+
+/* Two-column: heading left, content right */
+.split {
+  display: grid;
+  grid-template-columns: 16rem minmax(0, 1fr);
+  gap: 1rem 3rem;
+}
+.split > .section-head { margin: 0; }
+.split .prose { max-width: var(--measure); }
+
+@media (max-width: 760px) {
+  .split { grid-template-columns: 1fr; }
+}
+
+/* ── Buttons & links ── */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+  font-family: var(--sans);
+}
+.button {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+}
+.button:hover { background: var(--leaf); color: var(--paper); }
+.text-link {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* ── Footer ── */
+.site-footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 2rem;
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
+  font-family: var(--sans);
+  color: var(--ink-soft);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+}
+.site-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.site-footer a { text-decoration: none; color: var(--ink); }
+.site-footer a:hover { color: var(--leaf); }
+
+.theme-toggle {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  background: none;
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

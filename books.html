@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Books · Renato Jurišić</title>
+<meta name="description" content="Books Renato Jurišić has read.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="site.js"></script>
+<style>
+  /* One block per year read; each book is a row in the shelf */
+  .year-group {
+    display: grid;
+    grid-template-columns: 16rem minmax(0, 1fr);
+    gap: 1rem 3rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .year-group h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    margin: 0;
+    font-variant-numeric: lining-nums;
+  }
+  .shelf { list-style: none; margin: 0; padding: 0; }
+  .book {
+    padding: 0.2rem 0 0.2rem 1.1rem;
+    border-left: 3px solid var(--bloom);
+    margin-bottom: 1.25rem;
+  }
+  .book:last-child { margin-bottom: 0; }
+  .book.favourite { border-left-color: var(--leaf); }
+  .book cite {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.35;
+  }
+  .book .author { font-family: var(--sans); color: var(--ink-faint); }
+  .book p { margin: 0.35rem 0 0; color: var(--ink-soft); max-width: var(--measure); }
+
+  .key {
+    display: flex;
+    gap: 0.5rem 1.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+    font-family: var(--sans);
+    color: var(--ink-soft);
+  }
+  .key span { display: inline-flex; align-items: center; gap: 0.55rem; }
+  .key i { display: inline-block; width: 3px; height: 1.1em; background: var(--bloom); }
+  .key i.fav { background: var(--leaf); }
+
+  .empty {
+    display: grid;
+    grid-template-columns: 16rem minmax(0, 1fr);
+    gap: 1rem 3rem;
+  }
+  .empty h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .empty p { max-width: var(--measure); color: var(--ink-soft); margin: 0; }
+
+  @media (max-width: 760px) {
+    .year-group, .empty { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header wrap">
+  <a class="site-name" href="index.html">Renato Jurišić</a>
+  <nav class="site-nav" aria-label="Main">
+    <a href="index.html">Home</a>
+    <a href="career.html">Career</a>
+    <a href="blog.html">Blog</a>
+    <a href="books.html" aria-current="page">Books</a>
+  </nav>
+</header>
+
+<main>
+  <div class="page-intro wrap">
+    <h1>Books</h1>
+    <p>What I've read, grouped by the year I read it, newest first. The ones I'd recommend are marked in green.</p>
+    <div class="key" aria-hidden="true">
+      <span><i></i>Read</span>
+      <span><i class="fav"></i>Recommended</span>
+    </div>
+  </div>
+
+  <section class="wrap">
+    <!--
+      To add books: delete the .empty block below and add one .year-group per
+      year, newest first. Add class "favourite" to a .book to mark it green.
+      The note paragraph is optional.
+
+    <div class="year-group">
+      <h2>2026</h2>
+      <ul class="shelf">
+        <li class="book favourite">
+          <cite>Book title</cite>
+          <span class="author">Author name</span>
+          <p>Optional one-line note on why it's worth reading.</p>
+        </li>
+        <li class="book">
+          <cite>Another book</cite>
+          <span class="author">Author name</span>
+        </li>
+      </ul>
+    </div>
+    -->
+
+    <div class="empty section">
+      <h2>Shelf coming soon</h2>
+      <p>I'm putting the list together.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer wrap">
+  <ul>
+    <li><a href="mailto:renato.jurisic6@gmail.com">renato.jurisic6@gmail.com</a></li>
+    <li><a href="https://linkedin.com/in/renato-jurisic5">LinkedIn</a></li>
+    <li><a href="https://github.com/renato555">GitHub</a></li>
+  </ul>
+  <button class="theme-toggle" type="button">Dark mode</button>
+</footer>
+
+</body>
+</html>

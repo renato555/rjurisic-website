@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog · Renato Jurišić</title>
+<meta name="description" content="Writing by Renato Jurišić.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="site.js"></script>
+<style>
+  .posts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .post a {
+    display: grid;
+    grid-template-columns: 16rem minmax(0, 1fr);
+    gap: 0.25rem 3rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+  }
+  .post time {
+    font-family: var(--sans);
+    color: var(--ink-faint);
+    padding-top: 0.3rem;
+  }
+  .post h2 {
+    font-size: clamp(1.4rem, 2.6vw, 1.75rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    margin: 0 0 0.4rem;
+  }
+  .post p { margin: 0; color: var(--ink-soft); max-width: var(--measure); }
+  .post a:hover h2 { color: var(--leaf); }
+  @media (max-width: 760px) {
+    .post a { grid-template-columns: 1fr; }
+  }
+
+  .empty {
+    display: grid;
+    grid-template-columns: 16rem minmax(0, 1fr);
+    gap: 1rem 3rem;
+  }
+  .empty h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    margin: 0;
+  }
+  .empty p { max-width: var(--measure); color: var(--ink-soft); }
+  @media (max-width: 760px) {
+    .empty { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header wrap">
+  <a class="site-name" href="index.html">Renato Jurišić</a>
+  <nav class="site-nav" aria-label="Main">
+    <a href="index.html">Home</a>
+    <a href="career.html">Career</a>
+    <a href="blog.html" aria-current="page">Blog</a>
+    <a href="books.html">Books</a>
+  </nav>
+</header>
+
+<main>
+  <div class="page-intro wrap">
+    <h1>Blog</h1>
+    <p>Writing about the problems I work on and the things I learn along the way.</p>
+  </div>
+
+  <section class="section wrap">
+    <!--
+      When the first post is ready: delete the .empty block below and add
+      posts to this list, newest first.
+
+    <ol class="posts">
+      <li class="post">
+        <a href="blog/post-slug.html">
+          <time datetime="2026-11-01">1 November 2026</time>
+          <div>
+            <h2>Post title</h2>
+            <p>One or two sentences on what the post is about.</p>
+          </div>
+        </a>
+      </li>
+    </ol>
+    -->
+
+    <div class="empty">
+      <h2>No posts yet</h2>
+      <div>
+        <p>The first ones are being written. Until then, <a href="career.html">my career page</a> covers what I've been working on.</p>
+        <p>If you'd like to hear when something goes up, <a href="mailto:renato.jurisic6@gmail.com">email me</a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer wrap">
+  <ul>
+    <li><a href="mailto:renato.jurisic6@gmail.com">renato.jurisic6@gmail.com</a></li>
+    <li><a href="https://linkedin.com/in/renato-jurisic5">LinkedIn</a></li>
+    <li><a href="https://github.com/renato555">GitHub</a></li>
+  </ul>
+  <button class="theme-toggle" type="button">Dark mode</button>
+</footer>
+
+</body>
+</html>

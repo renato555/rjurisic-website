@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Renato Jurišić</title>
+<meta name="description" content="Renato Jurišić, senior software engineer in Zagreb. Real-time SMS fraud detection, LLM systems at scale, and a soft spot for mathematics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="site.js"></script>
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 2rem clamp(2rem, 5vw, 4rem);
+    align-items: center;
+    padding-top: clamp(1.5rem, 5vw, 3.5rem);
+    padding-bottom: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 8.5vw, 6.25rem);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    margin: 0 0 2rem;
+  }
+  .hero h1 span { display: block; }
+
+  .hero .lede {
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    line-height: 1.5;
+    max-width: 30rem;
+    margin-bottom: 1rem;
+  }
+  .hero .sub {
+    color: var(--ink-soft);
+    max-width: 30rem;
+    margin-bottom: 2rem;
+  }
+
+  .figure { margin: 0; }
+  .figure canvas {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--paper);
+  }
+  .figure figcaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    color: var(--ink-faint);
+  }
+  .figure figcaption em {
+    font-family: var(--serif);
+    color: var(--ink-soft);
+  }
+  .redraw {
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    font-weight: 600;
+    background: none;
+    border: 0;
+    padding: 0;
+    color: var(--leaf);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
+  .redraw:hover { color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .figure { max-width: 30rem; }
+  }
+
+  /* About */
+  .about {
+    display: grid;
+    grid-template-columns: 16rem minmax(0, 1fr) minmax(0, 17rem);
+    gap: 1.5rem 3rem;
+    align-items: start;
+  }
+  .about .prose { max-width: var(--measure); }
+  .portrait { margin: 0; }
+  .portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 1.25rem;
+    background: var(--paper-deep);
+  }
+  @media (max-width: 960px) {
+    .about { grid-template-columns: 16rem minmax(0, 1fr); }
+    .portrait { grid-column: 2; max-width: 17rem; }
+  }
+  @media (max-width: 760px) {
+    .about { grid-template-columns: 1fr; }
+    .portrait { grid-column: auto; }
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 0;
+    font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    font-style: italic;
+    max-width: 46rem;
+  }
+  blockquote p { margin: 0; }
+  blockquote::before {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 3px;
+    background: var(--leaf);
+    margin-bottom: 1.5rem;
+  }
+
+  .off-hours {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 2rem 3rem;
+    max-width: 48rem;
+  }
+  .off-hours h3 { font-size: 1.1rem; font-weight: 600; margin: 0 0 0.25rem; }
+  .off-hours p { margin: 0; color: var(--ink-soft); }
+
+  /* Directory */
+  .directory {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .directory li:last-child { border-bottom: 0; }
+  .directory li { border-bottom: 1px solid var(--rule); }
+  .directory a {
+    display: grid;
+    grid-template-columns: 16rem minmax(0, 1fr);
+    gap: 0.25rem 3rem;
+    padding: 1.4rem 0;
+    text-decoration: none;
+  }
+  .directory .name {
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+  }
+  .directory .what { color: var(--ink-soft); max-width: var(--measure); align-self: center; }
+  .directory a:hover .name { color: var(--leaf); }
+  @media (max-width: 760px) {
+    .directory a { grid-template-columns: 1fr; }
+  }
+
+  .colours {
+    color: var(--ink-soft);
+    max-width: var(--measure);
+    margin: 0;
+  }
+  .berry {
+    display: inline-block;
+    width: 0.7em;
+    height: 0.7em;
+    border-radius: 50%;
+    background: var(--bloom);
+    box-shadow: 0.45em 0.1em 0 -0.05em var(--ink-soft);
+    margin-right: 0.85em;
+    vertical-align: 0.02em;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header wrap">
+  <a class="site-name" href="index.html">Renato Jurišić</a>
+  <nav class="site-nav" aria-label="Main">
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="career.html">Career</a>
+    <a href="blog.html">Blog</a>
+    <a href="books.html">Books</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div>
+      <h1><span>Renato</span> <span>Jurišić</span></h1>
+      <p class="lede">I build systems that analyze hundreds of millions of messages a day, and AI tools that help the people around me work faster.</p>
+      <p class="sub">Senior software engineer at Infobip in Zagreb, working on LLM systems at scale. I studied computer science at FER and still think the best part of the job is a whiteboard and a hard problem.</p>
+      <div class="actions">
+        <a class="button" href="career.html">See my career</a>
+        <a class="text-link" href="mailto:renato.jurisic6@gmail.com">Email me</a>
+      </div>
+    </div>
+
+    <figure class="figure">
+      <canvas id="attractor" role="img" aria-label="A Clifford attractor: a looping, feather-like shape drawn from millions of points in green and blueberry tones."></canvas>
+      <figcaption>
+        <span><em>Clifford attractor,</em> <span id="attractor-params"></span></span>
+        <button class="redraw" id="attractor-redraw" type="button">Draw another</button>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="section wrap">
+    <div class="about">
+      <h2 class="section-head">About me</h2>
+      <div class="prose">
+        <p>I'm a software engineer from Zagreb, Croatia. I like problems that have a right answer and are hard to get to: making a system ten times faster, or making an LLM fast and cheap enough to handle hundreds of millions of requests a day.</p>
+        <p>I studied computer science at the Faculty of Electrical Engineering and Computing (FER), first software engineering and mathematics, then deep learning, computer vision and generative AI. I started at Infobip while still a student, spent a year teaching at FER, and came back to Infobip full-time when I finished my master's.</p>
+        <p>I speak Croatian natively and English at a full professional level.</p>
+      </div>
+      <figure class="portrait">
+        <img src="images/portrait.jpg" width="800" height="1000" alt="Renato Jurišić, smiling, in a black T-shirt with a conference lanyard.">
+      </figure>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <blockquote>
+      <p>There's nothing more enjoyable than standing in front of a whiteboard with smart people and brainstorming solutions to a problem.</p>
+    </blockquote>
+  </section>
+
+  <section class="section wrap">
+    <div class="split">
+      <h2 class="section-head">Off the clock</h2>
+      <div class="off-hours">
+        <div>
+          <h3>Puzzles</h3>
+          <p>I like the moment you see a problem from a different angle, model it with a bit of mathematics, and the solution follows. Same reason I liked competitive programming.</p>
+        </div>
+        <div>
+          <h3>Mathematics</h3>
+          <p>For its own sake, too. Discrete mathematics and graph theory are my favourites. Chaos theory is just fun, which is where the attractor above comes from.</p>
+        </div>
+        <div>
+          <h3>Piano</h3>
+          <p>Practice, slowly, until the hard bar isn't hard anymore.</p>
+        </div>
+        <div>
+          <h3>Gym</h3>
+          <p>Same idea, different muscles.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <ul class="directory">
+      <li><a href="career.html"><span class="name">Career</span><span class="what">From building LLM systems at Infobip back to high school in Zagreb, with what I did along the way.</span></a></li>
+      <li><a href="blog.html"><span class="name">Blog</span><span class="what">Writing about the problems I work on. The first posts are on the way.</span></a></li>
+      <li><a href="books.html"><span class="name">Books</span><span class="what">What I've been reading.</span></a></li>
+    </ul>
+  </section>
+
+  <section class="section wrap">
+    <p class="colours"><span class="berry" aria-hidden="true"></span>About the colours: green is my favourite, and the blue-purple is blueberries, my favourite fruit.</p>
+  </section>
+</main>
+
+<footer class="site-footer wrap">
+  <ul>
+    <li><a href="mailto:renato.jurisic6@gmail.com">renato.jurisic6@gmail.com</a></li>
+    <li><a href="https://linkedin.com/in/renato-jurisic5">LinkedIn</a></li>
+    <li><a href="https://github.com/renato555">GitHub</a></li>
+  </ul>
+  <button class="theme-toggle" type="button">Dark mode</button>
+</footer>
+
+<script src="attractor.js"></script>
+</body>
+</html>
