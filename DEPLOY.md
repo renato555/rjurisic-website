@@ -26,7 +26,7 @@ Expect about 30 minutes of work, plus some waiting for DNS.
 
 ## 2. Put the site on GitHub
 
-1. Create a **public** repository on github.com, for example `renato555.github.io`. With a custom domain the name doesn't matter.
+1. Create a **public** repository on github.com, named `rjurisic-website`. The site will be at `https://renato555.github.io/rjurisic-website/`.
 2. Push this folder to it:
 
    ```bash
@@ -34,7 +34,7 @@ Expect about 30 minutes of work, plus some waiting for DNS.
    git add .
    git commit -m "Initial site"
    git branch -M main
-   git remote add origin git@github.com:renato555/renato555.github.io.git
+   git remote add origin git@github.com:renato555/rjurisic-website.git
    git push -u origin main
    ```
 
@@ -72,10 +72,10 @@ The A and AAAA records point the bare domain at GitHub's servers. The CNAME reco
 1. In the repository, go to **Settings → Pages → Custom domain**, enter `yourdomain.com` and save. GitHub adds a `CNAME` file to the repository, so run `git pull` before your next push.
 2. Wait for the DNS check to go green. That's usually a few minutes but can take a few hours.
 3. Tick **Enforce HTTPS**. The certificate usually arrives within an hour; GitHub says it can take up to 24 hours.
-4. Point the link previews at the new domain. The `og:image` tags on every page use `https://renato555.github.io`, which GitHub redirects to your domain, but the direct address is more reliable for LinkedIn and Slack:
+4. Point the link previews at the new domain. The `og:image` tags on every page use `https://renato555.github.io/rjurisic-website`, which GitHub redirects to your domain, but the direct address is more reliable for LinkedIn and Slack:
 
    ```bash
-   sed -i 's|https://renato555.github.io|https://yourdomain.com|' *.html
+   sed -i 's|https://renato555.github.io/rjurisic-website|https://yourdomain.com|' *.html
    ```
 
 ## 6. Check it works
