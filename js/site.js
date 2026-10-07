@@ -15,7 +15,9 @@
     const btn = document.querySelector(".theme-toggle");
     if (!btn) return;
     const label = () => {
-      btn.textContent = currentTheme() === "dark" ? "Light mode" : "Dark mode";
+      const text = currentTheme() === "dark" ? "Switch to light mode" : "Switch to dark mode";
+      btn.setAttribute("aria-label", text);
+      btn.title = text;
     };
     label();
     btn.addEventListener("click", () => {

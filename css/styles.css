@@ -118,6 +118,7 @@ strong { font-weight: 600; }
 }
 
 .site-nav {
+  margin-left: auto;
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
@@ -234,17 +235,46 @@ strong { font-weight: 600; }
 .site-footer a { text-decoration: none; color: var(--ink); }
 .site-footer a:hover { color: var(--leaf); }
 
+/* ── Theme toggle (in the header): moon in light mode, sun in dark ── */
 .theme-toggle {
-  font-family: var(--sans);
-  font-size: 0.95rem;
+  align-self: center;
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: -0.5rem -0.5rem -0.5rem -0.75rem;
+  padding: 0;
   background: none;
-  border: 1px solid var(--rule);
+  border: none;
+  border-radius: 50%;
   color: var(--ink-soft);
-  border-radius: 999px;
-  padding: 0.3rem 0.85rem;
   cursor: pointer;
 }
-.theme-toggle:hover { color: var(--ink); border-color: var(--ink-faint); }
+.theme-toggle:hover { color: var(--ink); background: var(--paper-deep); }
+.theme-toggle svg {
+  grid-area: 1 / 1;
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+}
+
+/* Narrow screens: name and toggle on the first line, nav below */
+@media (max-width: 560px) {
+  .site-header { row-gap: 1rem; }
+  .site-nav { order: 1; flex-basis: 100%; margin-left: 0; }
+  .theme-toggle { margin-left: auto; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
