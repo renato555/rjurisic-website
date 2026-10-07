@@ -1,6 +1,8 @@
-# Deploying the site to a custom domain
+# Moving the site to a custom domain
 
-Hosting: **GitHub Pages** (free). Domain: **Cloudflare Registrar** (about €10–15 a year, sold at cost, WHOIS privacy included).
+The site is already live on GitHub Pages (see the README). This guide moves it to your own domain.
+
+The domain comes from **Cloudflare Registrar** (about €10–15 a year, sold at cost, WHOIS privacy included).
 
 Expect about 30 minutes of work, plus some waiting for DNS.
 
@@ -9,11 +11,6 @@ Expect about 30 minutes of work, plus some waiting for DNS.
 - A Cloudflare account and a payment card
 - Your GitHub account (`renato555`)
 - A domain name you've chosen
-
-## Before going live
-
-- [ ] Reread the copy written in your voice, especially "Off the clock" on `index.html`
-- [ ] Keep anything private out of this folder. Everything in the repository becomes public.
 
 ## 1. Buy the domain
 
@@ -24,23 +21,7 @@ Expect about 30 minutes of work, plus some waiting for DNS.
    - Cloudflare doesn't sell `.hr`. That needs a Croatian registrar through CARNET and more paperwork.
 3. Pay and turn on **auto-renew**. A lapsed domain can be bought by someone else.
 
-## 2. Put the site on GitHub
-
-1. Create a **public** repository on github.com, named `rjurisic-website`. The site will be at `https://renato555.github.io/rjurisic-website/`.
-2. Push this folder to it:
-
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial site"
-   git branch -M main
-   git remote add origin git@github.com:renato555/rjurisic-website.git
-   git push -u origin main
-   ```
-
-3. In the repository, go to **Settings → Pages**. Set **Source** to *Deploy from a branch*, choose `main` and `/ (root)`, and save.
-
-## 3. Verify the domain with GitHub
+## 2. Verify the domain with GitHub
 
 This stops anyone else from pointing a GitHub site at your domain.
 
@@ -49,7 +30,7 @@ This stops anyone else from pointing a GitHub site at your domain.
 3. In Cloudflare, go to **your domain → DNS → Records** and add that TXT record.
 4. Back on GitHub, click **Verify**.
 
-## 4. Point the domain at GitHub
+## 3. Point the domain at GitHub
 
 In Cloudflare, go to **DNS → Records** and add the records below. Set every one to **DNS only (grey cloud)**, not *Proxied*, or GitHub can't issue the HTTPS certificate.
 
@@ -67,7 +48,7 @@ In Cloudflare, go to **DNS → Records** and add the records below. Set every on
 
 The A and AAAA records point the bare domain at GitHub's servers. The CNAME record makes `www.` work too.
 
-## 5. Connect the domain to the repository
+## 4. Connect the domain to the repository
 
 1. In the repository, go to **Settings → Pages → Custom domain**, enter `yourdomain.com` and save. GitHub adds a `CNAME` file to the repository, so run `git pull` before your next push.
 2. Wait for the DNS check to go green. That's usually a few minutes but can take a few hours.
@@ -78,7 +59,7 @@ The A and AAAA records point the bare domain at GitHub's servers. The CNAME reco
    sed -i 's|https://renato555.github.io/rjurisic-website|https://yourdomain.com|' *.html
    ```
 
-## 6. Check it works
+## 5. Check it works
 
 - `https://yourdomain.com` loads the site
 - `https://www.yourdomain.com` redirects to it
