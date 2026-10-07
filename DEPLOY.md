@@ -13,7 +13,6 @@ Expect about 30 minutes of work, plus some waiting for DNS.
 ## Before going live
 
 - [ ] Reread the copy written in your voice, especially "Off the clock" on `index.html`
-- [ ] Add books to `books.html`, or hide the Books link until you have some
 - [ ] Keep anything private out of this folder. Everything in the repository becomes public.
 
 ## 1. Buy the domain
@@ -73,6 +72,11 @@ The A and AAAA records point the bare domain at GitHub's servers. The CNAME reco
 1. In the repository, go to **Settings → Pages → Custom domain**, enter `yourdomain.com` and save. GitHub adds a `CNAME` file to the repository, so run `git pull` before your next push.
 2. Wait for the DNS check to go green. That's usually a few minutes but can take a few hours.
 3. Tick **Enforce HTTPS**. The certificate usually arrives within an hour; GitHub says it can take up to 24 hours.
+4. Point the link previews at the new domain. The `og:image` tags on every page use `https://renato555.github.io`, which GitHub redirects to your domain, but the direct address is more reliable for LinkedIn and Slack:
+
+   ```bash
+   sed -i 's|https://renato555.github.io|https://yourdomain.com|' *.html
+   ```
 
 ## 6. Check it works
 
