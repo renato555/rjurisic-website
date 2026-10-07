@@ -130,9 +130,8 @@
 
   .off-hours {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: 2rem 3rem;
-    max-width: 48rem;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1.75rem 2.5rem;
   }
   .off-hours h3 { font-size: 1.1rem; font-weight: 600; margin: 0 0 0.25rem; }
   .off-hours p { margin: 0; color: var(--ink-soft); }
@@ -181,7 +180,7 @@
   }
 </style>
 </head>
-<body>
+<body class="home">
 
 <header class="site-header wrap">
   <a class="site-name" href="index.html">Renato Jurišić</a>
@@ -197,8 +196,8 @@
   <section class="hero wrap">
     <div>
       <h1><span>Renato</span> <span>Jurišić</span></h1>
-      <p class="lede">I build systems that analyze hundreds of millions of messages a day, and AI tools that help the people around me work faster.</p>
-      <p class="sub">Senior software engineer at Infobip in Zagreb, working on LLM systems at scale. I studied computer science at FER and still think the best part of the job is a whiteboard and a hard problem.</p>
+      <p class="lede">I build systems that analyse hundreds of millions of messages a day, and AI tools that help the people around me work faster.</p>
+      <p class="sub">Senior software engineer at Infobip in Zagreb, working on fraud prevention, high-performance systems and AI. I studied computer science at FER.</p>
       <div class="actions">
         <a class="button" href="career.html">See my career</a>
         <a class="text-link" href="mailto:renato.jurisic6@gmail.com">Email me</a>
@@ -206,9 +205,9 @@
     </div>
 
     <figure class="figure">
-      <canvas id="attractor" role="img" aria-label="A Clifford attractor: a looping, feather-like shape drawn from millions of points in green and blueberry tones."></canvas>
+      <canvas id="attractor" role="img" aria-label="A Clifford attractor, drawn from millions of points in green and blueberry tones."></canvas>
       <figcaption>
-        <span><em>Clifford attractor,</em> <span id="attractor-params"></span></span>
+        <span><em id="attractor-name">Clifford attractor,</em> <span id="attractor-params"></span></span>
         <button class="redraw" id="attractor-redraw" type="button">Draw another</button>
       </figcaption>
     </figure>
@@ -218,9 +217,9 @@
     <div class="about">
       <h2 class="section-head">About me</h2>
       <div class="prose">
-        <p>I'm a software engineer from Zagreb, Croatia. I like problems that have a right answer and are hard to get to: making a system ten times faster, or making an LLM fast and cheap enough to handle hundreds of millions of requests a day.</p>
-        <p>I studied computer science at the Faculty of Electrical Engineering and Computing (FER), first software engineering and mathematics, then deep learning, computer vision and generative AI. I started at Infobip while still a student, spent a year teaching at FER, and came back to Infobip full-time when I finished my master's.</p>
-        <p>I speak Croatian natively and English at a full professional level.</p>
+        <p>I like hard problems where you can measure the result: making a system ten times faster, or making an LLM cheap enough to run on hundreds of millions of messages a day.</p>
+        <p>At the Faculty of Electrical Engineering and Computing (FER), I studied computer science: first software engineering and mathematics, then deep learning, computer vision and generative AI. I started at Infobip while still a student, spent a year teaching at FER, and came back to Infobip full-time when I finished my master's.</p>
+        <p>Croatian is my native language, and my English is at a full professional level.</p>
       </div>
       <figure class="portrait">
         <img src="images/portrait.jpg" width="800" height="1000" alt="Renato Jurišić, smiling, in a black T-shirt with a conference lanyard.">
@@ -240,15 +239,23 @@
       <div class="off-hours">
         <div>
           <h3>Puzzles</h3>
-          <p>I like the moment you see a problem from a different angle, model it with a bit of mathematics, and the solution follows. Same reason I liked competitive programming.</p>
+          <p>Finding the angle that makes a hard problem easy.</p>
         </div>
         <div>
           <h3>Mathematics</h3>
-          <p>For its own sake, too. Discrete mathematics and graph theory are my favourites. Chaos theory is just fun, which is where the attractor above comes from.</p>
+          <p>Discrete maths and graph theory are my favourites.</p>
+        </div>
+        <div>
+          <h3>Building</h3>
+          <p>A builder by nature. Ideas that stick get made.</p>
+        </div>
+        <div>
+          <h3>Reading</h3>
+          <p>Mostly to learn something new. See <a href="books.html">Books</a>.</p>
         </div>
         <div>
           <h3>Piano</h3>
-          <p>Practice, slowly, until the hard bar isn't hard anymore.</p>
+          <p>Practising slowly until the hard bar isn't hard.</p>
         </div>
         <div>
           <h3>Gym</h3>
@@ -275,7 +282,6 @@
   <ul>
     <li><a href="mailto:renato.jurisic6@gmail.com">renato.jurisic6@gmail.com</a></li>
     <li><a href="https://linkedin.com/in/renato-jurisic5">LinkedIn</a></li>
-    <li><a href="https://github.com/renato555">GitHub</a></li>
   </ul>
   <button class="theme-toggle" type="button">Dark mode</button>
 </footer>

@@ -104,6 +104,8 @@ strong { font-weight: 600; }
   letter-spacing: -0.01em;
 }
 .site-name:hover { color: var(--ink); }
+/* The home page heading already shows the name; keep the space so the nav stays put */
+.home .site-name { visibility: hidden; }
 .site-name::before {
   content: "";
   display: inline-block;

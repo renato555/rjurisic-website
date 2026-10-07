@@ -10,69 +10,112 @@
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <script src="site.js"></script>
+<script src="book-graph.js" defer></script>
+<script src="bookmap.js" defer></script>
 <style>
-  /* One block per year read; each book is a row in the shelf */
-  .year-group {
-    display: grid;
-    grid-template-columns: 16rem minmax(0, 1fr);
-    gap: 1rem 3rem;
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--rule);
-  }
-  .year-group h2 {
-    font-size: 1.6rem;
-    font-weight: 500;
-    letter-spacing: -0.015em;
-    line-height: 1.2;
+  .shelf {
+    list-style: none;
     margin: 0;
-    font-variant-numeric: lining-nums;
+    padding: 2.5rem 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1.25rem 2.5rem;
+    align-items: start;
   }
-  .shelf { list-style: none; margin: 0; padding: 0; }
   .book {
-    padding: 0.2rem 0 0.2rem 1.1rem;
+    padding: 0.1rem 0 0.1rem 1rem;
     border-left: 3px solid var(--bloom);
-    margin-bottom: 1.25rem;
   }
-  .book:last-child { margin-bottom: 0; }
-  .book.favourite { border-left-color: var(--leaf); }
   .book cite {
     display: block;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 600;
     font-style: italic;
     line-height: 1.35;
   }
-  .book .author { font-family: var(--sans); color: var(--ink-faint); }
-  .book p { margin: 0.35rem 0 0; color: var(--ink-soft); max-width: var(--measure); }
-
-  .key {
-    display: flex;
-    gap: 0.5rem 1.75rem;
-    flex-wrap: wrap;
-    margin-top: 1.75rem;
-    font-family: var(--sans);
-    color: var(--ink-soft);
-  }
-  .key span { display: inline-flex; align-items: center; gap: 0.55rem; }
-  .key i { display: inline-block; width: 3px; height: 1.1em; background: var(--bloom); }
-  .key i.fav { background: var(--leaf); }
-
-  .empty {
+  .book .author { display: block; line-height: 1.5; font-family: var(--sans); color: var(--ink-faint); }
+  /* ── Book map ── */
+  .books-intro {
     display: grid;
-    grid-template-columns: 16rem minmax(0, 1fr);
-    gap: 1rem 3rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 28rem);
+    gap: 2rem 4rem;
+    align-items: center;
   }
-  .empty h2 {
-    font-size: 1.6rem;
-    font-weight: 500;
-    letter-spacing: -0.015em;
-    line-height: 1.2;
+  .bookmap-figure { margin: 0; }
+  .bookmap-figure figcaption {
+    margin-top: 0.75rem;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    text-align: center;
+    text-wrap: balance;
+  }
+  .bookmap {
+    position: relative;
     margin: 0;
   }
-  .empty p { max-width: var(--measure); color: var(--ink-soft); margin: 0; }
+  .bookmap svg { display: block; width: 100%; height: 100%; overflow: visible; }
+  .bookmap .hulls polygon {
+    fill: var(--paper-deep);
+    stroke: var(--paper-deep);
+    stroke-linejoin: round;
+  }
+  .bookmap .links line {
+    stroke: var(--ink-faint);
+    stroke-opacity: 0.35;
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    transition: stroke-opacity 0.15s;
+  }
+  .bookmap .nodes circle {
+    fill: var(--bloom);
+    stroke: transparent;
+    stroke-width: 14;   /* bigger target for the pointer */
+    vector-effect: non-scaling-stroke;
+    cursor: pointer;
+    transition: fill 0.15s, opacity 0.15s;
+  }
+  .bookmap .links line.across { stroke-opacity: 0.16; }
+  .bookmap.is-focused .links line { stroke-opacity: 0.08; }
+  .bookmap.is-focused .links line.on { stroke: var(--leaf); stroke-opacity: 0.9; stroke-width: 1.5; }
+  .bookmap.is-focused .nodes circle { opacity: 0.35; }
+  .bookmap .nodes circle.near { opacity: 1; fill: var(--leaf); }
+  .bookmap .nodes circle.on { opacity: 1; fill: var(--ink); }
+  .bookmap-label {
+    position: absolute;
+    transform: translate(-50%, -100%);
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .bookmap-tip {
+    position: absolute;
+    z-index: 1;
+    transform: translate(-50%, calc(-100% - 14px));
+    max-width: 17rem;
+    padding: 0.55rem 0.8rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 0.5rem;
+    line-height: 1.35;
+    pointer-events: none;
+  }
+  .bookmap-tip.below { transform: translate(-50%, 14px); }
+  .bookmap-tip.left { transform: translate(calc(-100% + 1rem), calc(-100% - 14px)); }
+  .bookmap-tip.right { transform: translate(-1rem, calc(-100% - 14px)); }
+  .bookmap-tip.below.left { transform: translate(calc(-100% + 1rem), 14px); }
+  .bookmap-tip.below.right { transform: translate(-1rem, 14px); }
+  .bookmap-tip cite { display: block; font-weight: 600; }
+  .bookmap-tip .author { display: block; font-family: var(--sans); font-size: 0.85rem; opacity: 0.75; }
+  .book.is-lit { border-left-color: var(--ink); }
+  .book { transition: border-color 0.15s; }
 
   @media (max-width: 760px) {
-    .year-group, .empty { grid-template-columns: 1fr; }
+    .books-intro { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -89,41 +132,69 @@
 </header>
 
 <main>
-  <div class="page-intro wrap">
-    <h1>Books</h1>
-    <p>What I've read, grouped by the year I read it, newest first. The ones I'd recommend are marked in green.</p>
-    <div class="key" aria-hidden="true">
-      <span><i></i>Read</span>
-      <span><i class="fav"></i>Recommended</span>
+  <div class="page-intro books-intro wrap">
+    <div>
+      <h1>Books</h1>
+      <p>I try to learn something new every day, and books are the best source of it I've found. These are the ones I've read in my free time.</p>
     </div>
+    <figure class="bookmap-figure">
+      <div class="bookmap" id="bookmap"></div>
+      <figcaption>Embeddings of the book descriptions.</figcaption>
+    </figure>
   </div>
 
   <section class="wrap">
-    <!--
-      To add books: delete the .empty block below and add one .year-group per
-      year, newest first. Add class "favourite" to a .book to mark it green.
-      The note paragraph is optional.
-
-    <div class="year-group">
-      <h2>2026</h2>
-      <ul class="shelf">
-        <li class="book favourite">
-          <cite>Book title</cite>
-          <span class="author">Author name</span>
-          <p>Optional one-line note on why it's worth reading.</p>
-        </li>
-        <li class="book">
-          <cite>Another book</cite>
-          <span class="author">Author name</span>
-        </li>
-      </ul>
-    </div>
-    -->
-
-    <div class="empty section">
-      <h2>Shelf coming soon</h2>
-      <p>I'm putting the list together.</p>
-    </div>
+    <ul class="shelf">
+      <!-- books:start: generated from tools/books.json by tools/book_graph.py -->
+      <li class="book" data-node="0"><cite>Built to Last</cite> <span class="author">Jim Collins &amp; Jerry I. Porras</span></li>
+      <li class="book" data-node="1"><cite>Hands-On Large Language Models</cite> <span class="author">Jay Alammar &amp; Maarten Grootendorst</span></li>
+      <li class="book" data-node="2"><cite>Efficient Linux at the Command Line</cite> <span class="author">Daniel J. Barrett</span></li>
+      <li class="book" data-node="3"><cite>Data Science from Scratch</cite> <span class="author">Joel Grus</span></li>
+      <li class="book" data-node="4"><cite>Java Performance</cite> <span class="author">Scott Oaks</span></li>
+      <li class="book" data-node="5"><cite>Range</cite> <span class="author">David Epstein</span></li>
+      <li class="book" data-node="6"><cite>One Hundred Years of Solitude</cite> <span class="author">Gabriel García Márquez</span></li>
+      <li class="book" data-node="7"><cite>Factfulness</cite> <span class="author">Hans Rosling, Ola Rosling &amp; Anna Rosling Rönnlund</span></li>
+      <li class="book" data-node="8"><cite>Sapiens</cite> <span class="author">Yuval Noah Harari</span></li>
+      <li class="book" data-node="9"><cite>Homo Deus</cite> <span class="author">Yuval Noah Harari</span></li>
+      <li class="book" data-node="10"><cite>Velika očekivanja / Great Expectations</cite> <span class="author">Charles Dickens</span></li>
+      <li class="book" data-node="11"><cite>How Not to Be Wrong</cite> <span class="author">Jordan Ellenberg</span></li>
+      <li class="book" data-node="12"><cite>The God Equation</cite> <span class="author">Michio Kaku</span></li>
+      <li class="book" data-node="13"><cite>Designing Data-Intensive Applications</cite> <span class="author">Martin Kleppmann</span></li>
+      <li class="book" data-node="14"><cite>Think Again</cite> <span class="author">Adam Grant</span></li>
+      <li class="book" data-node="15"><cite lang="hr">Izvan reda: Još 12 pravila za život</cite> <span class="author">Jordan B. Peterson</span></li>
+      <li class="book" data-node="16"><cite>Atomic Habits</cite> <span class="author">James Clear</span></li>
+      <li class="book" data-node="17"><cite lang="hr">Prevođenje programskih jezika</cite> <span class="author">Siniša Srbljić</span></li>
+      <li class="book" data-node="18"><cite>How to Win Friends &amp; Influence People</cite> <span class="author">Dale Carnegie</span></li>
+      <li class="book" data-node="19"><cite>Elon Musk</cite> <span class="author">Ashlee Vance</span></li>
+      <li class="book" data-node="20"><cite>Seven Brief Lessons on Physics</cite> <span class="author">Carlo Rovelli</span></li>
+      <li class="book" data-node="21"><cite>Chaos</cite> <span class="author">James Gleick</span></li>
+      <li class="book" data-node="22"><cite>What Every Body Is Saying</cite> <span class="author">Joe Navarro</span></li>
+      <li class="book" data-node="23"><cite>Structures: Or Why Things Don’t Fall Down</cite> <span class="author">J.E. Gordon</span></li>
+      <li class="book" data-node="24"><cite>Life 3.0</cite> <span class="author">Max Tegmark</span></li>
+      <li class="book" data-node="25"><cite>Calculus: An Intuitive and Physical Approach</cite> <span class="author">Morris Kline</span></li>
+      <li class="book" data-node="26"><cite lang="hr">12 pravila za život: Protuotrov kaosu</cite> <span class="author">Jordan B. Peterson</span></li>
+      <li class="book" data-node="27"><cite>Head First Java</cite> <span class="author">Kathy Sierra &amp; Bert Bates</span></li>
+      <li class="book" data-node="28"><cite lang="hr">Digitalni sustavi</cite> <span class="author">Uroš Peruško &amp; Vlado Glavinić</span></li>
+      <li class="book" data-node="29"><cite>Moji pronalasci / My Inventions</cite> <span class="author">Nikola Tesla</span></li>
+      <li class="book" data-node="30"><cite>The Return of the King</cite> <span class="author">J.R.R. Tolkien</span></li>
+      <li class="book" data-node="31"><cite>The Two Towers</cite> <span class="author">J.R.R. Tolkien</span></li>
+      <li class="book" data-node="32"><cite>The Fellowship of the Ring</cite> <span class="author">J.R.R. Tolkien</span></li>
+      <li class="book" data-node="33"><cite>The Art of War</cite> <span class="author">Sun Tzu</span></li>
+      <li class="book" data-node="34"><cite>Man’s Search for Meaning</cite> <span class="author">Viktor E. Frankl</span></li>
+      <li class="book" data-node="35"><cite lang="hr">Kompendij fizike za srednje škole</cite> <span class="author">Antun Kuntarić</span></li>
+      <li class="book" data-node="36"><cite>Influence: The Psychology of Persuasion</cite> <span class="author">Robert B. Cialdini</span></li>
+      <li class="book" data-node="37"><cite lang="hr">Kad tama zavlada</cite> <span class="author">Oliver Franić</span></li>
+      <li class="book" data-node="38"><cite>Basic Machines and How They Work</cite> <span class="author">U.S. Navy Bureau of Naval Personnel</span></li>
+      <li class="book" data-node="39"><cite lang="hr">Teorija informacije i kodiranje: zbirka zadataka</cite> <span class="author">Ilić, Bažant &amp; Beriša</span></li>
+      <li class="book" data-node="40"><cite lang="hr">Operacijski sustavi</cite> <span class="author">Leo Budin, Domagoj Jakobović, Marin Golub &amp; Leonardo Jelenković</span></li>
+      <li class="book" data-node="41"><cite>Steve Jobs</cite> <span class="author">Walter Isaacson</span></li>
+      <li class="book" data-node="42"><cite>Probability: For the Enthusiastic Beginner</cite> <span class="author">David Morin</span></li>
+      <li class="book" data-node="43"><cite lang="hr">Uvod u teoriju računarstva</cite> <span class="author">Siniša Srbljić</span></li>
+      <li class="book" data-node="44"><cite>Think and Grow Rich</cite> <span class="author">Napoleon Hill</span></li>
+      <li class="book" data-node="45"><cite>A Short History of Nearly Everything</cite> <span class="author">Bill Bryson</span></li>
+      <li class="book" data-node="46"><cite>A Brief History of Time</cite> <span class="author">Stephen Hawking</span></li>
+      <!-- books:end -->
+    </ul>
   </section>
 </main>
 
@@ -131,7 +202,6 @@
   <ul>
     <li><a href="mailto:renato.jurisic6@gmail.com">renato.jurisic6@gmail.com</a></li>
     <li><a href="https://linkedin.com/in/renato-jurisic5">LinkedIn</a></li>
-    <li><a href="https://github.com/renato555">GitHub</a></li>
   </ul>
   <button class="theme-toggle" type="button">Dark mode</button>
 </footer>
