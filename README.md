@@ -2,7 +2,7 @@
 
 My personal website: **https://renato555.github.io/rjurisic-website/**
 
-![The home page: my name and a short introduction next to a strange attractor drawn in green](.github/home.png)
+[![The home page: my name and a short introduction next to a strange attractor drawn in green](.github/home.png)](https://renato555.github.io/rjurisic-website/)
 
 I'm a senior software engineer at Infobip in Zagreb, working on fraud prevention, high-performance systems and AI. This site is where I keep my career, writing and reading in one place.
 
