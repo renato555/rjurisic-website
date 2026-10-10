@@ -11,7 +11,8 @@
     return (v < 0 ? "−" : "") + String(Math.abs(v));
   }
   function list(names, values) {
-    return names.map((n, i) => `${n} = ${fmt(values[i])}`).join(", ");
+    // Non-breaking spaces keep each "a = 1.4" together when the caption wraps
+    return names.map((n, i) => `${n} = ${fmt(values[i])}`).join(", ");
   }
 
   // ── Maps ──
