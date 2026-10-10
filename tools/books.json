@@ -33,6 +33,8 @@
    "about": "Beyond Order: twelve more rules for life. Self-help and psychology on meaning, responsibility, order and chaos in a person's life."},
   {"title": "Atomic Habits", "author": "James Clear",
    "about": "A self-help book on building good habits and breaking bad ones through small, consistent changes in behaviour."},
+  {"title": "System Design Interview – An Insider’s Guide", "author": "Alex Xu",
+   "about": "A software engineering book on designing large-scale distributed systems: scaling, load balancing, caching, sharding, rate limiters and key-value stores, framed as interview problems."},
   {"title": "Prevođenje programskih jezika", "author": "Siniša Srbljić", "lang": "hr",
    "about": "A university computer science textbook on compilers: lexical analysis, parsing, formal grammars and translating programming languages."},
   {"title": "How to Win Friends & Influence People", "author": "Dale Carnegie",

@@ -22,7 +22,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 <script src="js/site.js"></script>
-<script src="js/book-graph.js" defer></script>
 <script src="js/bookmap.js" defer></script>
 <style>
   .shelf {
@@ -70,7 +69,9 @@
   .bookmap .hulls polygon {
     fill: var(--paper-deep);
     stroke: var(--paper-deep);
+    stroke-width: 22;   /* reaches past the outermost books */
     stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
   }
   .bookmap .links line {
     stroke: var(--ink-faint);
@@ -154,7 +155,181 @@
       <p>I try to learn something new every day, and books are the best source of it I've found. These are the ones I've read in my free time.</p>
     </div>
     <figure class="bookmap-figure">
-      <div class="bookmap" id="bookmap"></div>
+      <!-- bookmap:start: generated from tools/books.json by tools/book_graph.py -->
+      <div class="bookmap" id="bookmap" style="aspect-ratio: 1600 / 1200">
+        <svg viewBox="0 0 1600 1200" aria-hidden="true">
+          <g class="hulls">
+            <polygon points="1147.6,530.9 1215.1,477.3 1381.2,414.2 1394.7,498.4 1418.8,695.7 1378.5,707"/>
+            <polygon points="653.1,879.8 692.9,797.5 768.7,841.5 856.1,908.5 830,1032.5 808.6,1116 695.8,1097.4"/>
+            <polygon points="547.9,270.2 625.3,333.8 665.9,384.8 694.4,466 624.3,412 584.4,357.9"/>
+            <polygon points="181.2,222.3 229.7,93.6 370.2,84 407.4,231.5 316.5,301.4"/>
+            <polygon points="343.2,704.1 360.6,664.9 526,752.5"/>
+            <polygon points="839,569.7 856.3,535.4 1016.4,631.9"/>
+            <polygon points="988.1,101.9 1107.4,165.5 1002,259.1"/>
+          </g>
+          <g class="links">
+            <line x1="467.5" y1="729.6" x2="397.5" y2="702.1" data-a="0" data-b="20"/>
+            <line x1="467.5" y1="729.6" x2="526" y2="752.5" data-a="0" data-b="34"/>
+            <line x1="467.5" y1="729.6" x2="785.6" y2="913.2" data-a="0" data-b="45" class="across"/>
+            <line x1="1215.1" y1="477.3" x2="1147.6" y2="530.9" data-a="1" data-b="3"/>
+            <line x1="1215.1" y1="477.3" x2="1290.7" y2="547.5" data-a="1" data-b="18"/>
+            <line x1="1215.1" y1="477.3" x2="1308" y2="482.5" data-a="1" data-b="44"/>
+            <line x1="1361.7" y1="590.9" x2="1329.5" y2="634.9" data-a="2" data-b="4"/>
+            <line x1="1361.7" y1="590.9" x2="1290.7" y2="547.5" data-a="2" data-b="18"/>
+            <line x1="1361.7" y1="590.9" x2="1402.7" y2="630" data-a="2" data-b="41"/>
+            <line x1="1147.6" y1="530.9" x2="856.3" y2="535.4" data-a="3" data-b="11" class="across"/>
+            <line x1="1147.6" y1="530.9" x2="988.1" y2="101.9" data-a="3" data-b="25" class="across"/>
+            <line x1="1147.6" y1="530.9" x2="1241.1" y2="564.2" data-a="3" data-b="28"/>
+            <line x1="1329.5" y1="634.9" x2="1378.5" y2="707" data-a="4" data-b="13"/>
+            <line x1="1329.5" y1="634.9" x2="1418.8" y2="695.7" data-a="4" data-b="17"/>
+            <line x1="1329.5" y1="634.9" x2="1290.7" y2="547.5" data-a="4" data-b="18"/>
+            <line x1="1329.5" y1="634.9" x2="1241.1" y2="564.2" data-a="4" data-b="28"/>
+            <line x1="1329.5" y1="634.9" x2="1402.7" y2="630" data-a="4" data-b="41"/>
+            <line x1="692.9" y1="797.5" x2="713.1" y2="885.4" data-a="5" data-b="15"/>
+            <line x1="692.9" y1="797.5" x2="653.1" y2="879.8" data-a="5" data-b="35"/>
+            <line x1="692.9" y1="797.5" x2="785.6" y2="913.2" data-a="5" data-b="45"/>
+            <line x1="229.7" y1="93.6" x2="181.2" y2="222.3" data-a="6" data-b="10"/>
+            <line x1="229.7" y1="93.6" x2="310.1" y2="198.6" data-a="6" data-b="31"/>
+            <line x1="229.7" y1="93.6" x2="370.2" y2="84" data-a="6" data-b="38"/>
+            <line x1="695.8" y1="1097.4" x2="720.2" y2="1008.8" data-a="7" data-b="14"/>
+            <line x1="695.8" y1="1097.4" x2="786" y2="1013.8" data-a="7" data-b="19"/>
+            <line x1="695.8" y1="1097.4" x2="665.9" y2="384.8" data-a="7" data-b="46" class="across"/>
+            <line x1="1002" y1="259.1" x2="1107.4" y2="165.5" data-a="8" data-b="9"/>
+            <line x1="1002" y1="259.1" x2="988.1" y2="101.9" data-a="8" data-b="25"/>
+            <line x1="1002" y1="259.1" x2="665.9" y2="384.8" data-a="8" data-b="46" class="across"/>
+            <line x1="1107.4" y1="165.5" x2="713.1" y2="885.4" data-a="9" data-b="15" class="across"/>
+            <line x1="1107.4" y1="165.5" x2="988.1" y2="101.9" data-a="9" data-b="25"/>
+            <line x1="181.2" y1="222.3" x2="310.1" y2="198.6" data-a="10" data-b="31"/>
+            <line x1="181.2" y1="222.3" x2="316.5" y2="301.4" data-a="10" data-b="33"/>
+            <line x1="856.3" y1="535.4" x2="720.2" y2="1008.8" data-a="11" data-b="14" class="across"/>
+            <line x1="856.3" y1="535.4" x2="893.9" y2="574.2" data-a="11" data-b="26"/>
+            <line x1="856.3" y1="535.4" x2="839" y2="569.7" data-a="11" data-b="43"/>
+            <line x1="856.3" y1="535.4" x2="665.9" y2="384.8" data-a="11" data-b="46" class="across"/>
+            <line x1="624.3" y1="412" x2="584.4" y2="357.9" data-a="12" data-b="21"/>
+            <line x1="624.3" y1="412" x2="694.4" y2="466" data-a="12" data-b="24"/>
+            <line x1="624.3" y1="412" x2="665.9" y2="384.8" data-a="12" data-b="46"/>
+            <line x1="624.3" y1="412" x2="625.3" y2="333.8" data-a="12" data-b="47"/>
+            <line x1="1378.5" y1="707" x2="1418.8" y2="695.7" data-a="13" data-b="17"/>
+            <line x1="1378.5" y1="707" x2="1402.7" y2="630" data-a="13" data-b="41"/>
+            <line x1="720.2" y1="1008.8" x2="713.1" y2="885.4" data-a="14" data-b="15"/>
+            <line x1="720.2" y1="1008.8" x2="786" y2="1013.8" data-a="14" data-b="19"/>
+            <line x1="720.2" y1="1008.8" x2="808.6" y2="1116" data-a="14" data-b="23"/>
+            <line x1="720.2" y1="1008.8" x2="653.1" y2="879.8" data-a="14" data-b="35"/>
+            <line x1="720.2" y1="1008.8" x2="830" y2="1032.5" data-a="14" data-b="37"/>
+            <line x1="713.1" y1="885.4" x2="768.7" y2="841.5" data-a="15" data-b="27"/>
+            <line x1="713.1" y1="885.4" x2="653.1" y2="879.8" data-a="15" data-b="35"/>
+            <line x1="713.1" y1="885.4" x2="785.6" y2="913.2" data-a="15" data-b="45"/>
+            <line x1="856.1" y1="908.5" x2="786" y2="1013.8" data-a="16" data-b="19"/>
+            <line x1="856.1" y1="908.5" x2="768.7" y2="841.5" data-a="16" data-b="27"/>
+            <line x1="856.1" y1="908.5" x2="785.6" y2="913.2" data-a="16" data-b="45"/>
+            <line x1="1418.8" y1="695.7" x2="1402.7" y2="630" data-a="17" data-b="41"/>
+            <line x1="1290.7" y1="547.5" x2="1241.1" y2="564.2" data-a="18" data-b="28"/>
+            <line x1="1290.7" y1="547.5" x2="1308" y2="482.5" data-a="18" data-b="44"/>
+            <line x1="786" y1="1013.8" x2="808.6" y2="1116" data-a="19" data-b="23"/>
+            <line x1="786" y1="1013.8" x2="830" y2="1032.5" data-a="19" data-b="37"/>
+            <line x1="786" y1="1013.8" x2="785.6" y2="913.2" data-a="19" data-b="45"/>
+            <line x1="397.5" y1="702.1" x2="343.2" y2="704.1" data-a="20" data-b="30"/>
+            <line x1="397.5" y1="702.1" x2="360.6" y2="664.9" data-a="20" data-b="42"/>
+            <line x1="397.5" y1="702.1" x2="785.6" y2="913.2" data-a="20" data-b="45" class="across"/>
+            <line x1="584.4" y1="357.9" x2="547.9" y2="270.2" data-a="21" data-b="22"/>
+            <line x1="584.4" y1="357.9" x2="956.5" y2="603.7" data-a="21" data-b="36" class="across"/>
+            <line x1="584.4" y1="357.9" x2="665.9" y2="384.8" data-a="21" data-b="46"/>
+            <line x1="584.4" y1="357.9" x2="625.3" y2="333.8" data-a="21" data-b="47"/>
+            <line x1="547.9" y1="270.2" x2="893.9" y2="574.2" data-a="22" data-b="26" class="across"/>
+            <line x1="547.9" y1="270.2" x2="625.3" y2="333.8" data-a="22" data-b="47"/>
+            <line x1="808.6" y1="1116" x2="830" y2="1032.5" data-a="23" data-b="37"/>
+            <line x1="694.4" y1="466" x2="1016.4" y2="631.9" data-a="24" data-b="39" class="across"/>
+            <line x1="694.4" y1="466" x2="665.9" y2="384.8" data-a="24" data-b="46"/>
+            <line x1="893.9" y1="574.2" x2="956.5" y2="603.7" data-a="26" data-b="36"/>
+            <line x1="893.9" y1="574.2" x2="839" y2="569.7" data-a="26" data-b="43"/>
+            <line x1="768.7" y1="841.5" x2="653.1" y2="879.8" data-a="27" data-b="35"/>
+            <line x1="768.7" y1="841.5" x2="785.6" y2="913.2" data-a="27" data-b="45"/>
+            <line x1="1241.1" y1="564.2" x2="1308" y2="482.5" data-a="28" data-b="44"/>
+            <line x1="1394.7" y1="498.4" x2="1016.4" y2="631.9" data-a="29" data-b="39" class="across"/>
+            <line x1="1394.7" y1="498.4" x2="1381.2" y2="414.2" data-a="29" data-b="40"/>
+            <line x1="1394.7" y1="498.4" x2="1402.7" y2="630" data-a="29" data-b="41"/>
+            <line x1="1394.7" y1="498.4" x2="1308" y2="482.5" data-a="29" data-b="44"/>
+            <line x1="343.2" y1="704.1" x2="956.5" y2="603.7" data-a="30" data-b="36" class="across"/>
+            <line x1="343.2" y1="704.1" x2="360.6" y2="664.9" data-a="30" data-b="42"/>
+            <line x1="343.2" y1="704.1" x2="665.9" y2="384.8" data-a="30" data-b="46" class="across"/>
+            <line x1="310.1" y1="198.6" x2="407.4" y2="231.5" data-a="31" data-b="32"/>
+            <line x1="310.1" y1="198.6" x2="316.5" y2="301.4" data-a="31" data-b="33"/>
+            <line x1="310.1" y1="198.6" x2="526" y2="752.5" data-a="31" data-b="34" class="across"/>
+            <line x1="310.1" y1="198.6" x2="370.2" y2="84" data-a="31" data-b="38"/>
+            <line x1="310.1" y1="198.6" x2="665.9" y2="384.8" data-a="31" data-b="46" class="across"/>
+            <line x1="407.4" y1="231.5" x2="316.5" y2="301.4" data-a="32" data-b="33"/>
+            <line x1="407.4" y1="231.5" x2="370.2" y2="84" data-a="32" data-b="38"/>
+            <line x1="407.4" y1="231.5" x2="665.9" y2="384.8" data-a="32" data-b="46" class="across"/>
+            <line x1="316.5" y1="301.4" x2="665.9" y2="384.8" data-a="33" data-b="46" class="across"/>
+            <line x1="526" y1="752.5" x2="785.6" y2="913.2" data-a="34" data-b="45" class="across"/>
+            <line x1="956.5" y1="603.7" x2="1016.4" y2="631.9" data-a="36" data-b="39"/>
+            <line x1="830" y1="1032.5" x2="785.6" y2="913.2" data-a="37" data-b="45"/>
+            <line x1="1381.2" y1="414.2" x2="839" y2="569.7" data-a="40" data-b="43" class="across"/>
+            <line x1="1381.2" y1="414.2" x2="1308" y2="482.5" data-a="40" data-b="44"/>
+            <line x1="360.6" y1="664.9" x2="665.9" y2="384.8" data-a="42" data-b="46" class="across"/>
+            <line x1="839" y1="569.7" x2="625.3" y2="333.8" data-a="43" data-b="47" class="across"/>
+            <line x1="665.9" y1="384.8" x2="625.3" y2="333.8" data-a="46" data-b="47"/>
+          </g>
+          <g class="nodes">
+            <circle cx="467.5" cy="729.6" r="12.5" data-node="0"/>
+            <circle cx="1215.1" cy="477.3" r="12.5" data-node="1"/>
+            <circle cx="1361.7" cy="590.9" r="12.5" data-node="2"/>
+            <circle cx="1147.6" cy="530.9" r="12.5" data-node="3"/>
+            <circle cx="1329.5" cy="634.9" r="12.5" data-node="4"/>
+            <circle cx="692.9" cy="797.5" r="12.5" data-node="5"/>
+            <circle cx="229.7" cy="93.6" r="12.5" data-node="6"/>
+            <circle cx="695.8" cy="1097.4" r="12.5" data-node="7"/>
+            <circle cx="1002" cy="259.1" r="12.5" data-node="8"/>
+            <circle cx="1107.4" cy="165.5" r="12.5" data-node="9"/>
+            <circle cx="181.2" cy="222.3" r="12.5" data-node="10"/>
+            <circle cx="856.3" cy="535.4" r="12.5" data-node="11"/>
+            <circle cx="624.3" cy="412" r="12.5" data-node="12"/>
+            <circle cx="1378.5" cy="707" r="12.5" data-node="13"/>
+            <circle cx="720.2" cy="1008.8" r="12.5" data-node="14"/>
+            <circle cx="713.1" cy="885.4" r="12.5" data-node="15"/>
+            <circle cx="856.1" cy="908.5" r="12.5" data-node="16"/>
+            <circle cx="1418.8" cy="695.7" r="12.5" data-node="17"/>
+            <circle cx="1290.7" cy="547.5" r="12.5" data-node="18"/>
+            <circle cx="786" cy="1013.8" r="12.5" data-node="19"/>
+            <circle cx="397.5" cy="702.1" r="12.5" data-node="20"/>
+            <circle cx="584.4" cy="357.9" r="12.5" data-node="21"/>
+            <circle cx="547.9" cy="270.2" r="12.5" data-node="22"/>
+            <circle cx="808.6" cy="1116" r="12.5" data-node="23"/>
+            <circle cx="694.4" cy="466" r="12.5" data-node="24"/>
+            <circle cx="988.1" cy="101.9" r="12.5" data-node="25"/>
+            <circle cx="893.9" cy="574.2" r="12.5" data-node="26"/>
+            <circle cx="768.7" cy="841.5" r="12.5" data-node="27"/>
+            <circle cx="1241.1" cy="564.2" r="12.5" data-node="28"/>
+            <circle cx="1394.7" cy="498.4" r="12.5" data-node="29"/>
+            <circle cx="343.2" cy="704.1" r="12.5" data-node="30"/>
+            <circle cx="310.1" cy="198.6" r="12.5" data-node="31"/>
+            <circle cx="407.4" cy="231.5" r="12.5" data-node="32"/>
+            <circle cx="316.5" cy="301.4" r="12.5" data-node="33"/>
+            <circle cx="526" cy="752.5" r="12.5" data-node="34"/>
+            <circle cx="653.1" cy="879.8" r="12.5" data-node="35"/>
+            <circle cx="956.5" cy="603.7" r="12.5" data-node="36"/>
+            <circle cx="830" cy="1032.5" r="12.5" data-node="37"/>
+            <circle cx="370.2" cy="84" r="12.5" data-node="38"/>
+            <circle cx="1016.4" cy="631.9" r="12.5" data-node="39"/>
+            <circle cx="1381.2" cy="414.2" r="12.5" data-node="40"/>
+            <circle cx="1402.7" cy="630" r="12.5" data-node="41"/>
+            <circle cx="360.6" cy="664.9" r="12.5" data-node="42"/>
+            <circle cx="839" cy="569.7" r="12.5" data-node="43"/>
+            <circle cx="1308" cy="482.5" r="12.5" data-node="44"/>
+            <circle cx="785.6" cy="913.2" r="12.5" data-node="45"/>
+            <circle cx="665.9" cy="384.8" r="12.5" data-node="46"/>
+            <circle cx="625.3" cy="333.8" r="12.5" data-node="47"/>
+          </g>
+        </svg>
+        <span class="bookmap-label" style="left: 82.67%; top: calc(34.51% - 13px)">Software &amp; computer science</span>
+        <span class="bookmap-label" style="left: 47.37%; top: calc(66.45% - 13px)">Mind &amp; people</span>
+        <span class="bookmap-label" style="left: 38.98%; top: calc(22.52% - 13px)">Science</span>
+        <span class="bookmap-label" style="left: 18.81%; top: calc(7.00% - 13px)">Fiction</span>
+        <span class="bookmap-label" style="left: 25.62%; top: calc(55.41% - 13px)">Builders &amp; strategy</span>
+        <span class="bookmap-label" style="left: 56.49%; top: calc(44.62% - 13px)">Maths &amp; mechanics</span>
+        <span class="bookmap-label" style="left: 64.53%; top: calc(8.49% - 13px)">Humanity &amp; the future</span>
+      </div>
+      <!-- bookmap:end -->
       <figcaption>Embeddings of the book descriptions.</figcaption>
     </figure>
   </div>
@@ -179,36 +354,37 @@
       <li class="book" data-node="14"><cite>Think Again</cite> <span class="author">Adam Grant</span></li>
       <li class="book" data-node="15"><cite lang="hr">Izvan reda: Još 12 pravila za život</cite> <span class="author">Jordan B. Peterson</span></li>
       <li class="book" data-node="16"><cite>Atomic Habits</cite> <span class="author">James Clear</span></li>
-      <li class="book" data-node="17"><cite lang="hr">Prevođenje programskih jezika</cite> <span class="author">Siniša Srbljić</span></li>
-      <li class="book" data-node="18"><cite>How to Win Friends &amp; Influence People</cite> <span class="author">Dale Carnegie</span></li>
-      <li class="book" data-node="19"><cite>Elon Musk</cite> <span class="author">Ashlee Vance</span></li>
-      <li class="book" data-node="20"><cite>Seven Brief Lessons on Physics</cite> <span class="author">Carlo Rovelli</span></li>
-      <li class="book" data-node="21"><cite>Chaos</cite> <span class="author">James Gleick</span></li>
-      <li class="book" data-node="22"><cite>What Every Body Is Saying</cite> <span class="author">Joe Navarro</span></li>
-      <li class="book" data-node="23"><cite>Structures: Or Why Things Don’t Fall Down</cite> <span class="author">J.E. Gordon</span></li>
-      <li class="book" data-node="24"><cite>Life 3.0</cite> <span class="author">Max Tegmark</span></li>
-      <li class="book" data-node="25"><cite>Calculus: An Intuitive and Physical Approach</cite> <span class="author">Morris Kline</span></li>
-      <li class="book" data-node="26"><cite lang="hr">12 pravila za život: Protuotrov kaosu</cite> <span class="author">Jordan B. Peterson</span></li>
-      <li class="book" data-node="27"><cite>Head First Java</cite> <span class="author">Kathy Sierra &amp; Bert Bates</span></li>
-      <li class="book" data-node="28"><cite lang="hr">Digitalni sustavi</cite> <span class="author">Uroš Peruško &amp; Vlado Glavinić</span></li>
-      <li class="book" data-node="29"><cite>Moji pronalasci / My Inventions</cite> <span class="author">Nikola Tesla</span></li>
-      <li class="book" data-node="30"><cite>The Return of the King</cite> <span class="author">J.R.R. Tolkien</span></li>
-      <li class="book" data-node="31"><cite>The Two Towers</cite> <span class="author">J.R.R. Tolkien</span></li>
-      <li class="book" data-node="32"><cite>The Fellowship of the Ring</cite> <span class="author">J.R.R. Tolkien</span></li>
-      <li class="book" data-node="33"><cite>The Art of War</cite> <span class="author">Sun Tzu</span></li>
-      <li class="book" data-node="34"><cite>Man’s Search for Meaning</cite> <span class="author">Viktor E. Frankl</span></li>
-      <li class="book" data-node="35"><cite lang="hr">Kompendij fizike za srednje škole</cite> <span class="author">Antun Kuntarić</span></li>
-      <li class="book" data-node="36"><cite>Influence: The Psychology of Persuasion</cite> <span class="author">Robert B. Cialdini</span></li>
-      <li class="book" data-node="37"><cite lang="hr">Kad tama zavlada</cite> <span class="author">Oliver Franić</span></li>
-      <li class="book" data-node="38"><cite>Basic Machines and How They Work</cite> <span class="author">U.S. Navy Bureau of Naval Personnel</span></li>
-      <li class="book" data-node="39"><cite lang="hr">Teorija informacije i kodiranje: zbirka zadataka</cite> <span class="author">Ilić, Bažant &amp; Beriša</span></li>
-      <li class="book" data-node="40"><cite lang="hr">Operacijski sustavi</cite> <span class="author">Leo Budin, Domagoj Jakobović, Marin Golub &amp; Leonardo Jelenković</span></li>
-      <li class="book" data-node="41"><cite>Steve Jobs</cite> <span class="author">Walter Isaacson</span></li>
-      <li class="book" data-node="42"><cite>Probability: For the Enthusiastic Beginner</cite> <span class="author">David Morin</span></li>
-      <li class="book" data-node="43"><cite lang="hr">Uvod u teoriju računarstva</cite> <span class="author">Siniša Srbljić</span></li>
-      <li class="book" data-node="44"><cite>Think and Grow Rich</cite> <span class="author">Napoleon Hill</span></li>
-      <li class="book" data-node="45"><cite>A Short History of Nearly Everything</cite> <span class="author">Bill Bryson</span></li>
-      <li class="book" data-node="46"><cite>A Brief History of Time</cite> <span class="author">Stephen Hawking</span></li>
+      <li class="book" data-node="17"><cite>System Design Interview – An Insider’s Guide</cite> <span class="author">Alex Xu</span></li>
+      <li class="book" data-node="18"><cite lang="hr">Prevođenje programskih jezika</cite> <span class="author">Siniša Srbljić</span></li>
+      <li class="book" data-node="19"><cite>How to Win Friends &amp; Influence People</cite> <span class="author">Dale Carnegie</span></li>
+      <li class="book" data-node="20"><cite>Elon Musk</cite> <span class="author">Ashlee Vance</span></li>
+      <li class="book" data-node="21"><cite>Seven Brief Lessons on Physics</cite> <span class="author">Carlo Rovelli</span></li>
+      <li class="book" data-node="22"><cite>Chaos</cite> <span class="author">James Gleick</span></li>
+      <li class="book" data-node="23"><cite>What Every Body Is Saying</cite> <span class="author">Joe Navarro</span></li>
+      <li class="book" data-node="24"><cite>Structures: Or Why Things Don’t Fall Down</cite> <span class="author">J.E. Gordon</span></li>
+      <li class="book" data-node="25"><cite>Life 3.0</cite> <span class="author">Max Tegmark</span></li>
+      <li class="book" data-node="26"><cite>Calculus: An Intuitive and Physical Approach</cite> <span class="author">Morris Kline</span></li>
+      <li class="book" data-node="27"><cite lang="hr">12 pravila za život: Protuotrov kaosu</cite> <span class="author">Jordan B. Peterson</span></li>
+      <li class="book" data-node="28"><cite>Head First Java</cite> <span class="author">Kathy Sierra &amp; Bert Bates</span></li>
+      <li class="book" data-node="29"><cite lang="hr">Digitalni sustavi</cite> <span class="author">Uroš Peruško &amp; Vlado Glavinić</span></li>
+      <li class="book" data-node="30"><cite>Moji pronalasci / My Inventions</cite> <span class="author">Nikola Tesla</span></li>
+      <li class="book" data-node="31"><cite>The Return of the King</cite> <span class="author">J.R.R. Tolkien</span></li>
+      <li class="book" data-node="32"><cite>The Two Towers</cite> <span class="author">J.R.R. Tolkien</span></li>
+      <li class="book" data-node="33"><cite>The Fellowship of the Ring</cite> <span class="author">J.R.R. Tolkien</span></li>
+      <li class="book" data-node="34"><cite>The Art of War</cite> <span class="author">Sun Tzu</span></li>
+      <li class="book" data-node="35"><cite>Man’s Search for Meaning</cite> <span class="author">Viktor E. Frankl</span></li>
+      <li class="book" data-node="36"><cite lang="hr">Kompendij fizike za srednje škole</cite> <span class="author">Antun Kuntarić</span></li>
+      <li class="book" data-node="37"><cite>Influence: The Psychology of Persuasion</cite> <span class="author">Robert B. Cialdini</span></li>
+      <li class="book" data-node="38"><cite lang="hr">Kad tama zavlada</cite> <span class="author">Oliver Franić</span></li>
+      <li class="book" data-node="39"><cite>Basic Machines and How They Work</cite> <span class="author">U.S. Navy Bureau of Naval Personnel</span></li>
+      <li class="book" data-node="40"><cite lang="hr">Teorija informacije i kodiranje: zbirka zadataka</cite> <span class="author">Ilić, Bažant &amp; Beriša</span></li>
+      <li class="book" data-node="41"><cite lang="hr">Operacijski sustavi</cite> <span class="author">Leo Budin, Domagoj Jakobović, Marin Golub &amp; Leonardo Jelenković</span></li>
+      <li class="book" data-node="42"><cite>Steve Jobs</cite> <span class="author">Walter Isaacson</span></li>
+      <li class="book" data-node="43"><cite>Probability: For the Enthusiastic Beginner</cite> <span class="author">David Morin</span></li>
+      <li class="book" data-node="44"><cite lang="hr">Uvod u teoriju računarstva</cite> <span class="author">Siniša Srbljić</span></li>
+      <li class="book" data-node="45"><cite>Think and Grow Rich</cite> <span class="author">Napoleon Hill</span></li>
+      <li class="book" data-node="46"><cite>A Short History of Nearly Everything</cite> <span class="author">Bill Bryson</span></li>
+      <li class="book" data-node="47"><cite>A Brief History of Time</cite> <span class="author">Stephen Hawking</span></li>
       <!-- books:end -->
     </ul>
   </section>
