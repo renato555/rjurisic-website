@@ -34,7 +34,7 @@
     align-items: start;
   }
   .book {
-    padding: 0.1rem 0 0.1rem 1rem;
+    padding: 0.3rem 0.75rem 0.3rem 1rem;   /* room for the highlight */
     border-left: 3px solid var(--bloom);
   }
   .book cite {
@@ -136,14 +136,8 @@
   .bookmap-tip.below.right { transform: translate(-1rem, 14px); }
   .bookmap-tip cite { display: block; font-weight: 600; }
   .bookmap-tip .author { display: block; font-family: var(--sans); font-size: 0.85rem; opacity: 0.75; }
-  .book.is-lit { border-left-color: var(--ink); }
-  /* A book picked on the map glows briefly once it scrolls into view */
-  .book.is-flashed { animation: book-flash 1.6s ease-out 0.35s backwards; }
-  @keyframes book-flash {
-    from { background: var(--leaf-soft); }
-    to { background: transparent; }
-  }
-  .book { transition: border-color 0.15s; }
+  .book.is-lit { border-left-color: var(--ink); background: var(--leaf-soft); }
+  .book { transition: border-color 0.15s, background-color 0.15s; }
 
   @media (max-width: 760px) {
     .books-intro { grid-template-columns: 1fr; }

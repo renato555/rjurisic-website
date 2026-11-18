@@ -38,7 +38,9 @@
     });
   }
 
-  function focus(i) {
+  // The title tip shows only for a dot hovered or clicked on the map; from the list
+  // the reader already sees the title, so only the dot and its links light up
+  function focus(i, withTip = true) {
     box.classList.toggle("is-focused", i !== null);
     dots.forEach((c, j) => {
       c.classList.toggle("on", j === i);
@@ -49,7 +51,7 @@
       line.classList.toggle("on", i !== null && (a === i || b === i));
     });
     items.forEach((li, j) => li.classList.toggle("is-lit", j === i));
-    if (i === null) {
+    if (i === null || !withTip) {
       tip.hidden = true;
       return;
     }
@@ -65,32 +67,63 @@
     tip.classList.toggle("right", x / W < 0.3);
   }
 
-  // Hovering previews a book; clicking a dot picks it, so it stays lit once the
-  // pointer leaves, and scrolls the book into view
+  // Hover (mouse) lights a book: a dot shows its title tip, a book only lights its dot.
+  // Click or tap, on a dot or a book, picks the book: dot, links and book stay lit,
+  // without the tip, until the next scroll, a click elsewhere or a hover on another
+  // book. A picked dot also scrolls its book into view.
   let picked = null;
+  let touch = false;    // the last press was a finger, which has no hover
 
+  function pick(i) {
+    picked = i;
+    focus(i, false);
+  }
+
+  // Hovering another book moves on from the pick, so leaving it lights nothing.
+  // Until the mouse moves after a click on a dot, hovers come only from reveal()
+  // scrolling books under the pointer, and are ignored.
+  let clickedAt = null;
+  let pressedAt = null;
+  const stillThere = (e) => clickedAt &&
+    Math.abs(e.clientX - clickedAt[0]) < 1 && Math.abs(e.clientY - clickedAt[1]) < 1;
+  function hover(e, i, withTip) {
+    if (stillThere(e)) return;
+    clickedAt = null;
+    if (picked !== null && i !== picked) picked = null;
+    focus(i, withTip);
+  }
+  function unhover(e) {
+    if (stillThere(e)) return;
+    focus(picked, false);
+  }
+
+  document.addEventListener("pointerdown", (e) => {
+    touch = e.pointerType === "touch";
+    pressedAt = [e.clientX, e.clientY];   // a click's own coordinates are rounded
+  }, true);
   svg.addEventListener("pointerover", (e) => {
-    if (e.target.dataset.node) focus(+e.target.dataset.node);
+    if (e.target.dataset.node && e.pointerType !== "touch") hover(e, +e.target.dataset.node, true);
   });
   svg.addEventListener("pointerout", (e) => {
-    // A tap keeps the book shown until the next tap
-    if (e.target.dataset.node && e.pointerType !== "touch") focus(picked);
+    if (e.target.dataset.node && e.pointerType !== "touch") unhover(e);
   });
   svg.addEventListener("click", (e) => {
-    picked = e.target.dataset.node ? +e.target.dataset.node : null;
-    focus(picked);
-    if (picked !== null) reveal(items[picked]);
-  });
-  // A click anywhere else lets the pick go
-  document.addEventListener("click", (e) => {
-    if (picked !== null && !svg.contains(e.target)) {
-      picked = null;
-      focus(null);
+    if (!e.target.dataset.node) return pick(null);
+    const i = +e.target.dataset.node;
+    pick(i);
+    if (!touch) {
+      focus(i);   // the mouse is still on the dot: keep the hover tip until it moves away
+      clickedAt = pressedAt;
     }
+    reveal(items[i]);
+  });
+  document.addEventListener("click", (e) => {
+    if (picked !== null && !svg.contains(e.target) && !e.target.closest(".book[data-node]")) pick(null);
   });
   items.forEach((li, i) => {
-    li.addEventListener("pointerenter", () => focus(i));
-    li.addEventListener("pointerleave", () => focus(picked));
+    li.addEventListener("pointerenter", (e) => { if (e.pointerType !== "touch") hover(e, i, false); });
+    li.addEventListener("pointerleave", (e) => { if (e.pointerType !== "touch") unhover(e); });
+    li.addEventListener("click", () => pick(i));
   });
 
   // Docking: the intro is sticky (books.html), offset so it sticks once the map
@@ -128,10 +161,7 @@
     if (text) {
       const band = intro.offsetHeight + parseFloat(intro.style.top);   // docked height
       const visibleTop = Math.max(band, intro.getBoundingClientRect().bottom);
-      if (rect.top >= visibleTop && rect.bottom <= window.innerHeight) {
-        flash(li);
-        return;
-      }
+      if (rect.top >= visibleTop && rect.bottom <= window.innerHeight) return;
       const room = window.innerHeight - band;
       const target = window.scrollY + rect.top - band - Math.max(0, (room - rect.height) / 2);
       const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -141,13 +171,6 @@
       autoScroll();
       li.scrollIntoView({ block: "center", behavior: "smooth" });
     }
-    flash(li);
-  }
-
-  function flash(li) {
-    li.classList.remove("is-flashed");
-    void li.offsetWidth;   // restart the animation
-    li.classList.add("is-flashed");
   }
 
   // Scrolling lets a picked book go, except for the scroll that reveal() starts:
@@ -161,7 +184,7 @@
   let frame = 0;
   window.addEventListener("scroll", () => {
     if (auto) autoScroll();
-    else if (picked !== null) { picked = null; focus(null); }
+    else if (picked !== null) pick(null);
     if (!frame) frame = requestAnimationFrame(() => { frame = 0; dock(); });
   }, { passive: true });
 
