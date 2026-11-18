@@ -52,7 +52,19 @@
     gap: 2rem 4rem;
     align-items: center;
   }
-  .bookmap-figure { margin: 0; }
+  /* The intro sticks as you scroll: the text fades, the map slides to the
+     middle and stays at the top over the shelf (see the end of bookmap.js) */
+  .books-intro {
+    position: sticky;
+    z-index: 2;
+    padding-bottom: 1.5rem;   /* the docked band stays short */
+    background: var(--paper);
+  }
+  .bookmap-figure {
+    margin: 0;
+    width: min(100%, 52vh);   /* short screens: keep room for the shelf below */
+    justify-self: end;
+  }
   .bookmap-figure figcaption {
     margin-top: 0.75rem;
     font-family: var(--sans);
@@ -125,10 +137,17 @@
   .bookmap-tip cite { display: block; font-weight: 600; }
   .bookmap-tip .author { display: block; font-family: var(--sans); font-size: 0.85rem; opacity: 0.75; }
   .book.is-lit { border-left-color: var(--ink); }
+  /* A book picked on the map glows briefly once it scrolls into view */
+  .book.is-flashed { animation: book-flash 1.6s ease-out 0.35s backwards; }
+  @keyframes book-flash {
+    from { background: var(--leaf-soft); }
+    to { background: transparent; }
+  }
   .book { transition: border-color 0.15s; }
 
   @media (max-width: 760px) {
     .books-intro { grid-template-columns: 1fr; }
+    .bookmap-figure { width: min(100%, 44vh); justify-self: center; }
   }
 </style>
 </head>
@@ -149,8 +168,9 @@
 </header>
 
 <main>
+  <div class="books-stage">
   <div class="page-intro books-intro wrap">
-    <div>
+    <div class="books-intro-text">
       <h1>Books</h1>
       <p>I try to learn something new every day, and books are the best source of it I've found. These are the ones I've read in my free time.</p>
     </div>
@@ -388,6 +408,7 @@
       <!-- books:end -->
     </ul>
   </section>
+  </div>
 </main>
 
 <footer class="site-footer wrap">

@@ -65,28 +65,115 @@
     tip.classList.toggle("right", x / W < 0.3);
   }
 
+  // Hovering previews a book; clicking a dot picks it, so it stays lit once the
+  // pointer leaves, and scrolls the book into view
+  let picked = null;
+
   svg.addEventListener("pointerover", (e) => {
     if (e.target.dataset.node) focus(+e.target.dataset.node);
   });
   svg.addEventListener("pointerout", (e) => {
     // A tap keeps the book shown until the next tap
-    if (e.target.dataset.node && e.pointerType !== "touch") focus(null);
+    if (e.target.dataset.node && e.pointerType !== "touch") focus(picked);
   });
   svg.addEventListener("click", (e) => {
-    if (!e.target.dataset.node) focus(null);
+    picked = e.target.dataset.node ? +e.target.dataset.node : null;
+    focus(picked);
+    if (picked !== null) reveal(items[picked]);
+  });
+  // A click anywhere else lets the pick go
+  document.addEventListener("click", (e) => {
+    if (picked !== null && !svg.contains(e.target)) {
+      picked = null;
+      focus(null);
+    }
   });
   items.forEach((li, i) => {
     li.addEventListener("pointerenter", () => focus(i));
-    li.addEventListener("pointerleave", () => focus(null));
+    li.addEventListener("pointerleave", () => focus(picked));
   });
 
-  draw();
+  // Docking: the intro is sticky (books.html), offset so it sticks once the map
+  // reaches the top of the screen. Until then the scroll slides the map to the
+  // middle and fades the text beside it, so the map stays in view over the shelf.
+  const intro = box.closest(".books-intro");
+  const figure = box.closest("figure");
+  const text = intro && intro.querySelector(".books-intro-text");
+  const GAP = 12;       // px: space above the docked map
+  let stickAt = 1;      // scroll position where the intro sticks
+  let shift = 0;        // px: from the map's place in the layout to the middle
+
+  function measure() {
+    if (!text) return;
+    // The sticky intro is the figure's offsetParent; offsets ignore transforms
+    const n = figure.offsetTop - GAP;
+    intro.style.top = -n + "px";
+    stickAt = Math.max(1, intro.parentElement.offsetTop + n);
+    shift = intro.clientWidth / 2 - (figure.offsetLeft + figure.offsetWidth / 2);
+    dock();
+  }
+
+  function dock() {
+    if (!text) return;
+    const p = Math.min(Math.max(window.scrollY / stickAt, 0), 1);
+    figure.style.transform = Math.abs(shift) > 1 ? `translateX(${(shift * p).toFixed(1)}px)` : "";
+    const fade = Math.min(1, p * 1.4);   // text is gone a little before the map lands
+    text.style.opacity = 1 - fade;
+    text.style.visibility = fade >= 1 ? "hidden" : "";
+  }
+
+  // Scroll a book into the part of the screen below the docked map
+  function reveal(li) {
+    const rect = li.getBoundingClientRect();
+    if (text) {
+      const band = intro.offsetHeight + parseFloat(intro.style.top);   // docked height
+      const visibleTop = Math.max(band, intro.getBoundingClientRect().bottom);
+      if (rect.top >= visibleTop && rect.bottom <= window.innerHeight) {
+        flash(li);
+        return;
+      }
+      const room = window.innerHeight - band;
+      const target = window.scrollY + rect.top - band - Math.max(0, (room - rect.height) / 2);
+      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      autoScroll();
+      window.scrollTo({ top: target, behavior: still ? "auto" : "smooth" });
+    } else {
+      autoScroll();
+      li.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+    flash(li);
+  }
+
+  function flash(li) {
+    li.classList.remove("is-flashed");
+    void li.offsetWidth;   // restart the animation
+    li.classList.add("is-flashed");
+  }
+
+  // Scrolling lets a picked book go, except for the scroll that reveal() starts:
+  // that one counts as over once the page has been still for a moment
+  let auto = 0;
+  function autoScroll() {
+    clearTimeout(auto);
+    auto = setTimeout(() => { auto = 0; }, 150);
+  }
+
+  let frame = 0;
+  window.addEventListener("scroll", () => {
+    if (auto) autoScroll();
+    else if (picked !== null) { picked = null; focus(null); }
+    if (!frame) frame = requestAnimationFrame(() => { frame = 0; dock(); });
+  }, { passive: true });
+
+  function layoutAll() { draw(); measure(); }
+
+  layoutAll();
   // Labels are measured for the clamp, so measure again once the web fonts are in
-  document.fonts.ready.then(draw);
+  document.fonts.ready.then(layoutAll);
   focus(null);
   let timer;
   window.addEventListener("resize", () => {
     clearTimeout(timer);
-    timer = setTimeout(draw, 150);
+    timer = setTimeout(layoutAll, 150);
   });
 })();
